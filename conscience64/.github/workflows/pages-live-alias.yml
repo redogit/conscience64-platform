@@ -1,0 +1,112 @@
+name: Verify live public test bed
+
+on:
+  workflow_run:
+    workflows: ["Sync Conscience64 public test bed"]
+    types: [completed]
+    branches: [main]
+  pull_request:
+    paths:
+      - 'public-testbed/**'
+      - 'play/public-index.html'
+      - 'play/musilanguage/**'
+      - 'play/neon-veil/**'
+      - 'PUBLIC_TESTBED_APPROVAL.json'
+      - 'PUBLIC_PLAY_HUB_APPROVAL.json'
+      - 'PUBLIC_NEON_VEIL_APPROVAL.json'
+      - 'PUBLIC_DREAM_ROUTES_APPROVAL.json'
+      - 'tools/add-dream-pages.py'
+      - 'tools/build-public-testbed.mjs'
+      - 'tools/check-public-testbed.mjs'
+      - 'tools/check-public-testbed-edge.mjs'
+      - 'tools/check-neon-veil-release.py'
+      - 'tools/private-origin-boundary.mjs'
+      - 'tools/check_pages_sync.mjs'
+      - '.github/workflows/pages-sync.yml'
+      - '.github/workflows/pages-live-alias.yml'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: conscience64-public-testbed-live-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-live-testbed:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      EXPECTED_SOURCE_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.event.pull_request.head.sha || github.sha }}
+      PAGES_URL: https://redogit.github.io/conscience64/
+    steps:
+      - name: Materialize exact intended source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          [[ "$EXPECTED_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --depth=1 origin "$EXPECTED_SOURCE_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE_SHA"
+
+      - name: Verify static projection and workflow contracts
+        run: |
+          set -euo pipefail
+          node --check tools/check-public-testbed-edge.mjs
+          node tools/check_pages_sync.mjs
+          node tools/check-public-testbed.mjs --revision "$EXPECTED_SOURCE_SHA"
+          python3 tools/check-neon-veil-release.py .
+          python3 tools/add-dream-pages.py --test
+
+      - name: Rebuild exact expected projection and compare gh-pages tree
+        if: ${{ github.event_name == 'workflow_run' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED="$RUNNER_TEMP/expected-public-testbed"
+          node tools/build-public-testbed.mjs --root . --out "$EXPECTED" --revision "$EXPECTED_SOURCE_SHA"
+          python3 tools/add-dream-pages.py --out "$EXPECTED"
+
+          git fetch --depth=1 origin gh-pages:refs/remotes/origin/gh-pages
+          published_sha="$(git rev-parse refs/remotes/origin/gh-pages)"
+          echo "PUBLISHED_PROJECTION_SHA=$published_sha" >> "$GITHUB_ENV"
+
+          git ls-tree -r --name-only refs/remotes/origin/gh-pages | sort > "$RUNNER_TEMP/published-files.txt"
+          (cd "$EXPECTED" && find . -type f -print | sed 's#^./##' | sort) > "$RUNNER_TEMP/expected-files.txt"
+          diff -u "$RUNNER_TEMP/expected-files.txt" "$RUNNER_TEMP/published-files.txt"
+
+          while IFS= read -r rel; do
+            git show "refs/remotes/origin/gh-pages:$rel" > "$RUNNER_TEMP/published-file"
+            cmp "$EXPECTED/$rel" "$RUNNER_TEMP/published-file"
+          done < "$RUNNER_TEMP/expected-files.txt"
+
+          node - "$EXPECTED/projection-manifest.json" "$EXPECTED_SOURCE_SHA" <<'NODE'
+          const fs=require('node:fs');
+          const manifest=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          if(manifest.source_revision!==process.argv[3])throw new Error('projection manifest source revision mismatch');
+          if(manifest.publication_scope!=='public-testbed-plus-curated-play')throw new Error('projection scope mismatch');
+          console.log(`PASS exact gh-pages projection bytes source=${manifest.source_revision} projection=${manifest.projection_sha256}`);
+          NODE
+
+      - name: Verify deployed network edge
+        if: ${{ github.event_name == 'workflow_run' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=false
+          for attempt in $(seq 1 90); do
+            if PAGES_URL="$PAGES_URL" EXPECTED_SOURCE_SHA="$EXPECTED_SOURCE_SHA" node tools/check-public-testbed-edge.mjs; then
+              ok=true
+              break
+            fi
+            sleep 2
+          done
+          test "$ok" = true
+          echo "PASS live public test bed + Musilanguage + NEON//VEIL source=$EXPECTED_SOURCE_SHA projection_commit=$PUBLISHED_PROJECTION_SHA"
+
+      - name: Verify public Dream app and About Me announcement over anonymous HTTPS
+        if: ${{ github.event_name == 'workflow_run' }}
+        run: python3 tools/add-dream-pages.py --live

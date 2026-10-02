@@ -1,0 +1,231 @@
+{
+  "schema": "standalone-export-status/v1",
+  "workspace": "conscience64-platform",
+  "status": "validated-local-export-with-declared-limitations",
+  "source_bytes_and_modes": "verified against original Git blobs and SHA-256; original checkouts untouched",
+  "historical_scope_files": 150,
+  "dependency_files": 360,
+  "totals": {
+    "passed": 85,
+    "skipped": 0,
+    "additional_successful_checks": 3
+  },
+  "checks": [
+    {
+      "group": "conscience64-platform",
+      "check": "site-runtime",
+      "command": [
+        "node",
+        "tools/check_site.mjs"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "PASS update: 14 source-qualified lessons; strict endpoint filters; direct, IRPO and message routes",
+        "PASS site: 734 records, 218 nodes, 508 edges, 7 projects; app startup and API smoke checks"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "research-selfcheck",
+      "command": [
+        "python",
+        "tools/redogit_selfcheck.py"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "PASS bytes  sql/STABILIZER_AGGREGATE_IDENTITY.md bytes=1679 sha256=dec5c8cf50a796eb72bafca035ea76ecd379329f9b8fc53e1748c848125c9eb1",
+        "PASS bytes  sql/STABILIZER_AGGREGATE_WALSH_CHECK.json bytes=884 sha256=46a5bcca7fca01d97626963aac043390a07e16d3532ddc5992b3941444c6467b",
+        "PASS bytes  sql/CONSTRUCTION_COST_TURN_2026-09-12.md bytes=3346 sha256=875f1cea3dd6d42da30a9ebd344cc369e50edf1fb16364662bea35ff91b9dbd3",
+        "PASS bytes  sql/CONSTRUCTION_COST_RESULTS_2026-09-12.json bytes=1260 sha256=1c23616efc42023f939a51b6417e59283932697eb9e1ce1a4ca90782afad6589",
+        "PASS bytes  sql/frontier_mutilation_v4_construction.sql bytes=335 sha256=8e0b213a94e81896cb6b3c101faec685bc92604308bc2c3d3aeaba350d095819",
+        "PASS bytes  sql/SYMMETRY_AWARE_CONSTRUCTION_V5.md bytes=3216 sha256=1eb1ad815a71e00a0f003a7da27f847671b92c2ce38be010954419becb5af614",
+        "PASS bytes  sql/SYMMETRY_AWARE_CONSTRUCTION_V5_RESULTS.json bytes=3775 sha256=235f89b2f9b6b4360fd7674cfd035b3aa4e172fac064706a838dffc42de94840",
+        "PASS bytes  sql/frontier_mutilation_v5.sql bytes=579 sha256=03e7529c0f8cc557b8982a363f50dfcfd5130c77b6b8349bb1730c32c29892c7",
+        "PASS bytes  sql/symmetry_aware_constructor_v5.cpp bytes=6718 sha256=2d67e936d861e4a3df1500662dee8f0fce2450c45c17ab132d82d623d8c4eb2d",
+        "PASS bytes  selection/HIGHGIRTH20_COMPACT_MAXCUT28_CERT.min.json bytes=359 sha256=d73e271cdca713e0d4a7ac406106282bb1bd586eabf90c5f37795b0ddc60098c",
+        "PASS bytes  selection/verify_compact_maxcut28_min.py bytes=918 sha256=a20fc29480614ada45dfeb0aa9b9add8a683472d60f05f793020f8f7a91d0406",
+        "PASS bytes  selection/COMPACT_MAXCUT28_CERTIFICATE.md bytes=2358 sha256=c5d610ec61095e9f0bae7d5369fadae5f4a22b9dd566d006d254fd506a322bfa"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "cooperative-field",
+      "command": [
+        "node",
+        "tools/check_cooperative_field.mjs"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "PASS cooperative field: 10 authority files; defining factors, standing rules, names, plan, evidence, locations, memory contract and manifest consistent"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "platform-modules",
+      "command": [
+        "node",
+        "--test",
+        "analytics/test.mjs",
+        "coordinate-space/test_codec.mjs",
+        "coordinate-space/test_culture.mjs",
+        "coordinate-space/test_source_file.mjs",
+        "image-society/image-society.test.mjs",
+        "image-society/scale.test.mjs",
+        "image-society/scheduler.test.mjs",
+        "image-society/schema-runtime.test.mjs",
+        "navigation/context-horizon/current-chat-artifacts.test.mjs",
+        "navigation/context-horizon/engine.test.mjs",
+        "navigation/context-horizon/library-work-expansion.test.mjs",
+        "navigation/context-horizon/named-architecture-expansion.test.mjs",
+        "navigation/context-horizon/questions.test.mjs",
+        "navigation/context-horizon/repair-successors.test.mjs",
+        "navigation/context-horizon/route-registry.test.mjs",
+        "navigation/context-horizon/work-inventory.test.mjs"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "PASS 7 repair successors and 5 historical releases preserve predecessor lineage and bounded evidence",
+        "PASS site-level Context Horizon route graph: 30 routes; game projection 13",
+        "PASS preservation inventory keeps individual works distinct",
+        "PASS stable-ID merge only; alias conflicts stay ambiguous; domain conflicts fail closed",
+        "PASS external public repositories resolve preservation seeds without exposing private repository identity",
+        "PASS historical, philosophical, professional, and creative works remain separate unresolved preservation targets",
+        "PASS older protocols, negative experiments, learned artifacts, and human-aim drafts remain individually preserved",
+        "PASS cross-chat compiler, serialization, compass, carrier, and expression-recovery lines remain distinct",
+        "\u2139 tests 49",
+        "\u2139 pass 49",
+        "\u2139 fail 0",
+        "\u2139 skipped 0"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "analytics-python",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-p",
+        "test_*.py"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "Ran 22 tests in 6.163s",
+        "OK"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "coordinate-python",
+      "command": [
+        "python",
+        "test_public.py"
+      ],
+      "environment": {},
+      "exit": 0,
+      "summary": [
+        "Ran 9 tests in 0.043s",
+        "OK"
+      ]
+    },
+    {
+      "group": "conscience64-platform",
+      "check": "available-tooling",
+      "exit": 0,
+      "summary": [
+        "Node tests 5; passed 5; failed 0."
+      ],
+      "note": "Uses the separately recorded export-specific route expectation. Preserved original test remains incompatible with deliberate route exclusion."
+    }
+  ],
+  "earlier_failed_checks": [
+    {
+      "check": "research-selfcheck",
+      "exit": 1,
+      "timeout_seconds": null,
+      "summary": [
+        "PASS bytes  sql/STABILIZER_AGGREGATE_IDENTITY.md bytes=1679 sha256=dec5c8cf50a796eb72bafca035ea76ecd379329f9b8fc53e1748c848125c9eb1",
+        "PASS bytes  sql/STABILIZER_AGGREGATE_WALSH_CHECK.json bytes=884 sha256=46a5bcca7fca01d97626963aac043390a07e16d3532ddc5992b3941444c6467b",
+        "PASS bytes  sql/CONSTRUCTION_COST_TURN_2026-09-12.md bytes=3346 sha256=875f1cea3dd6d42da30a9ebd344cc369e50edf1fb16364662bea35ff91b9dbd3",
+        "PASS bytes  sql/CONSTRUCTION_COST_RESULTS_2026-09-12.json bytes=1260 sha256=1c23616efc42023f939a51b6417e59283932697eb9e1ce1a4ca90782afad6589",
+        "PASS bytes  sql/frontier_mutilation_v4_construction.sql bytes=335 sha256=8e0b213a94e81896cb6b3c101faec685bc92604308bc2c3d3aeaba350d095819",
+        "PASS bytes  sql/SYMMETRY_AWARE_CONSTRUCTION_V5.md bytes=3216 sha256=1eb1ad815a71e00a0f003a7da27f847671b92c2ce38be010954419becb5af614",
+        "PASS bytes  sql/SYMMETRY_AWARE_CONSTRUCTION_V5_RESULTS.json bytes=3775 sha256=235f89b2f9b6b4360fd7674cfd035b3aa4e172fac064706a838dffc42de94840",
+        "PASS bytes  sql/frontier_mutilation_v5.sql bytes=579 sha256=03e7529c0f8cc557b8982a363f50dfcfd5130c77b6b8349bb1730c32c29892c7",
+        "PASS bytes  sql/symmetry_aware_constructor_v5.cpp bytes=6718 sha256=2d67e936d861e4a3df1500662dee8f0fce2450c45c17ab132d82d623d8c4eb2d",
+        "PASS bytes  selection/HIGHGIRTH20_COMPACT_MAXCUT28_CERT.min.json bytes=359 sha256=d73e271cdca713e0d4a7ac406106282bb1bd586eabf90c5f37795b0ddc60098c",
+        "PASS bytes  selection/verify_compact_maxcut28_min.py bytes=918 sha256=a20fc29480614ada45dfeb0aa9b9add8a683472d60f05f793020f8f7a91d0406",
+        "PASS bytes  selection/COMPACT_MAXCUT28_CERTIFICATE.md bytes=2358 sha256=c5d610ec61095e9f0bae7d5369fadae5f4a22b9dd566d006d254fd506a322bfa"
+      ]
+    },
+    {
+      "check": "platform-modules",
+      "exit": 1,
+      "timeout_seconds": null,
+      "summary": [
+        "PASS analytics contract: 9 event kinds, validated DOM rendering, ISO time bridge.",
+        "PASS deterministic Context Horizon ranking without epistemic/value leakage",
+        "PASS one-question discriminator preserves domain distinctions and never fabricates routes",
+        "PASS site-level Context Horizon route graph: 30 routes; game projection 13",
+        "PASS preservation inventory keeps individual works distinct",
+        "PASS stable-ID merge only; alias conflicts stay ambiguous; domain conflicts fail closed",
+        "\u2139 tests 50",
+        "\u2139 pass 44",
+        "\u2139 fail 6",
+        "\u2139 skipped 0"
+      ]
+    },
+    {
+      "check": "available-tooling",
+      "exit": 1,
+      "timeout_seconds": null,
+      "summary": [
+        "PASS governed hypothesis Algorithm Builder: intuition->hypothesis->one-degree plan->bounded evaluation->successor repair; INTUITION != EVIDENCE",
+        "PASS private-method recovery: rule + abstract method round-trip; source/story injection, publication promotion, false regrounding, and boundary weakening rejected.",
+        "PASS semantic applicability gate: controlled applicable=1 unresolved=1 blocked=2; live repository candidates=10 remain unresolved without explicit contracts",
+        "\u2139 tests 5",
+        "\u2139 pass 4",
+        "\u2139 fail 1",
+        "\u2139 skipped 0"
+      ]
+    },
+    {
+      "check": "available-tooling",
+      "exit": 1,
+      "timeout_seconds": null,
+      "summary": [
+        "PASS governed hypothesis Algorithm Builder: intuition->hypothesis->one-degree plan->bounded evaluation->successor repair; INTUITION != EVIDENCE",
+        "PASS private-method recovery: rule + abstract method round-trip; source/story injection, publication promotion, false regrounding, and boundary weakening rejected.",
+        "PASS semantic applicability gate: controlled applicable=1 unresolved=1 blocked=2; live repository candidates=10 remain unresolved without explicit contracts",
+        "\u2139 tests 5",
+        "\u2139 pass 4",
+        "\u2139 fail 1",
+        "\u2139 skipped 0"
+      ]
+    }
+  ],
+  "root_validation_runner": "exercised successfully",
+  "limitations": [
+    "Chrome/Chromium browser checks could not run because google-chrome is absent.",
+    "Full Windows SDK, Android and native LLVM/MLIR builds were not tested.",
+    "All fifteen original exclusions remain absent; excluded test/projection tools are not claimed as validated.",
+    "Original scope status and original test reports are historical; this is a new export validation, not a replay claim for the old 740-test aggregate.",
+    "Original commits remain intact in the source repositories; unrelated full history is not imported into these scoped exports.",
+    "No remote repository creation, push, Pages publication or hosted deployment was performed."
+  ],
+  "content_scan": {
+    "unique_source_blobs": 1722,
+    "archive_members": 1067,
+    "credential_pattern_findings": 0,
+    "structured_private_origin_true_count": 0,
+    "scope": "Bounded credential and explicit private-origin-marker scan; not a universal personal-data classifier."
+  }
+}

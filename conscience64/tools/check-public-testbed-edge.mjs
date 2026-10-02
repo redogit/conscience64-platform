@@ -1,0 +1,155 @@
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {containsRestrictedOrigin} from './private-origin-boundary.mjs';
+
+const base=(process.env.PAGES_URL||'').replace(/\/+$/,'')+'/';
+const expected=process.env.EXPECTED_SOURCE_SHA||'';
+assert.ok(/^https:\/\//.test(base),'PAGES_URL must be https');
+assert.match(expected,/^[0-9a-f]{40}$/);
+
+async function get(rel,{json=false,bytes=false,expect=200}={}){
+  const sep=rel.includes('?')?'&':'?';
+  const url=base+rel+sep+'source='+expected.slice(0,12);
+  const response=await fetch(url,{redirect:'follow',headers:{'cache-control':'no-cache'}});
+  assert.equal(response.status,expect,`${rel} returned ${response.status}, expected ${expect}`);
+  if(json)return response.json();
+  if(bytes)return new Uint8Array(await response.arrayBuffer());
+  return response.text();
+}
+
+const manifest=await get('projection-manifest.json',{json:true});
+assert.equal(manifest.schema,'conscience64.public-testbed-projection/v0');
+assert.equal(manifest.source_revision,expected);
+assert.equal(manifest.source_root,'public-testbed/ + curated play hub + curated play/musilanguage/ + curated play/neon-veil/');
+assert.equal(manifest.publication_scope,'public-testbed-plus-curated-play');
+assert.equal(manifest.authority,'experimental-non-authoritative');
+assert.match(manifest.projection_sha256,/^[0-9a-f]{64}$/);
+assert.deepEqual(
+  manifest.files.map(f=>f.path).sort(),
+  [
+    'app.js','carrier-surface/index.html','index.html',
+    'play/index.html',
+    'play/musilanguage/engine.js',
+    'play/musilanguage/index.html',
+    'play/musilanguage/listener-floats.js',
+    'play/musilanguage/music64.js',
+    'play/musilanguage/style-profiles.js',
+    'play/musilanguage/utf8-space.js',
+    'play/musilanguage/word-forge.js',
+    'play/neon-veil/app.js',
+    'play/neon-veil/downloads/NEON_VEIL_ANDROID_2026-09-29.zip',
+    'play/neon-veil/downloads/NEON_VEIL_IPHONE_IPAD_2026-09-29.zip',
+    'play/neon-veil/downloads/NEON_VEIL_LINUX_2026-09-29.zip',
+    'play/neon-veil/downloads/NEON_VEIL_MACOS_2026-09-29.zip',
+    'play/neon-veil/downloads/NEON_VEIL_WINDOWS_2026-09-29.zip',
+    'play/neon-veil/index.html',
+    'play/neon-veil/release.json',
+    'play/neon-veil/style.css',
+    's1-models/index.html','style.css','testbed.json'
+  ]
+);
+assert.ok(manifest.files.every(f=>String(f.source).startsWith('public-testbed/')||String(f.source)==='play/public-index.html'||String(f.source).startsWith('play/musilanguage/')||String(f.source).startsWith('play/neon-veil/')));
+assert.ok(!containsRestrictedOrigin(manifest));
+
+const data=await get('testbed.json',{json:true});
+assert.equal(data.schema,'conscience64.public-testbed-source/v0');
+assert.equal(data.marker,'31173');
+assert.equal(data.publication_scope,'public-testbed-only');
+assert.equal(data.authority,'experimental-non-authoritative');
+assert.ok(!containsRestrictedOrigin(data));
+assert.equal(data.rooms.length,6);
+assert.ok(data.experiments?.[0]?.remainder?.length>0);
+assert.ok(data.experiments?.[0]?.claim_boundary);
+assert.deepEqual([...new Set(data.paths.map(p=>p.status))].sort(),['active','blocked','deferred','failed','return','tested']);
+assert.ok(data.paths.every(p=>p.currentness&&p.provenance&&p.claim_boundary&&p.remainder));
+assert.ok(data.paths.some(p=>p.status==='tested'&&String(p.zero_result).includes('0 declared forbidden repository routes')));
+assert.ok(data.paths.some(p=>p.status==='failed'&&p.currentness==='HISTORICAL_SUPERSEDED'));
+assert.ok(data.paths.some(p=>p.status==='return'&&String(p.provenance).includes('gh-pages:3dcb37a5')));
+assert.ok(data.aliases.every(a=>a.relation==='ALIAS_ONLY'));
+assert.ok(data.verified_lineage.some(e=>e.relation==='VERIFIER_REPAIR'));
+assert.ok(data.unresolved_relations.some(e=>e.relation==='PRESERVED_UNRESOLVED'));
+assert.deepEqual(
+  data.principles.map(p=>p.name).sort(),
+  ['Interlingua','One-degree experiment','Pairity','USDAY','Visible paths','Wonderment']
+);
+assert.ok(data.principles.every(p=>String(p.boundary).includes('!=')));
+
+const html=await get('');
+assert.match(html,/Public Experimental Test Bed/);
+assert.match(html,/31173/);
+assert.match(html,/PUBLIC EXPERIMENT ≠ VERIFIED TRUTH/);
+assert.match(html,/PRIVATE SOURCE MUST NOT PROPAGATE/);
+assert.match(html,/Path Constellation — visible states/);
+assert.match(html,/Language Garden — aliases without forced identity/);
+assert.match(html,/Working principles/);
+
+for(const rel of ['app.js','style.css'])await get(rel);
+
+const carrierPage=await get('carrier-surface/');
+assert.match(carrierPage,/Object identity is invariant; coordinates are negotiable\./);
+assert.match(carrierPage,/17ce340776455735a1af814031b88b887a5cf421/);
+assert.match(carrierPage,/MULTI_KEY_RELATION != MATHEMATICAL_MANIFOLD/);
+assert.match(carrierPage,/cca44e23ca663600cc3466f45d7dc509c466b796/);
+assert.match(carrierPage,/186\/186/);
+
+const playHub=await get('play/');
+assert.match(playHub,/Conscience64 \/ Play/);
+assert.match(playHub,/NEON\/\/VEIL · Public Release/);
+assert.match(playHub,/NEON_VEIL_WINDOWS_2026-09-29\.zip/);
+const music=await get('play/musilanguage/');
+assert.match(music,/Musilanguage Studio/);
+assert.match(music,/id="instruments"/);
+assert.match(music,/History lives inside the instrument/);
+for(const rel of [
+  'play/musilanguage/engine.js',
+  'play/musilanguage/utf8-space.js',
+  'play/musilanguage/style-profiles.js',
+  'play/musilanguage/music64.js',
+  'play/musilanguage/listener-floats.js',
+  'play/musilanguage/word-forge.js'
+])await get(rel);
+
+const neon=await get('play/neon-veil/');
+assert.match(neon,/NEON\/\/VEIL/);
+assert.match(neon,/GitHub Pages is the release\/launcher hub, not the simulation server/);
+const neonRelease=await get('play/neon-veil/release.json',{json:true});
+assert.equal(neonRelease.schema,'neon-veil/public-release/v1');
+assert.equal(neonRelease.public_backend,false);
+assert.equal(neonRelease.trusted_lan_only,true);
+assert.equal(neonRelease.packages.length,5);
+for(const pkg of neonRelease.packages){
+  const raw=await get('play/neon-veil/downloads/'+pkg.file,{bytes:true});
+  assert.equal(raw.byteLength,pkg.bytes,`NEON package size mismatch: ${pkg.file}`);
+  assert.equal(createHash('sha256').update(raw).digest('hex'),pkg.sha256,`NEON package hash mismatch: ${pkg.file}`);
+}
+
+const s1Page=await get('s1-models/');
+assert.match(s1Page,/S Prime candidate-state model/);
+assert.match(s1Page,/Survivor/);
+assert.match(s1Page,/SemanticWorkUnit/);
+assert.match(s1Page,/Grand Unified Perceptron \/ multi-timescale cell/);
+assert.match(s1Page,/29effa0cfb52a019d51d81fae47aa8e056ab71cf/);
+assert.match(s1Page,/CURRENT WORKING MODEL ≠ PINNED IMPLEMENTATION/);
+assert.match(s1Page,/Executable Carrier–Surface bridge/);
+assert.match(s1Page,/cca44e23ca663600cc3466f45d7dc509c466b796/);
+assert.match(s1Page,/35523193624/);
+assert.match(s1Page,/186\/186/);
+assert.match(s1Page,/PROJECTION_SUCCESS != RECONSTRUCTION_SUCCESS/);
+
+
+for(const forbidden of [
+  'README.md',
+  'data-manifest.json',
+  'research/projects/README.md',
+  'play/README.md',
+  'play/mmo/index.html',
+  'about/index.html',
+  'play/musilanguage/radio.html',
+  'play/musilanguage/single.html',
+  'play/musilanguage/word-forge.html',
+  'play/neon-veil/README.md'
+]){
+  await get(forbidden,{expect:404});
+}
+
+console.log(`PASS public edge: source=${expected} projection=${manifest.projection_sha256} files=${manifest.files.length}; testbed + central Play hub + Musilanguage + NEON//VEIL present with exact package hashes; non-authorized repository routes absent`);

@@ -1,0 +1,1239 @@
+{
+  "schema": "scoped-repository-export/v1",
+  "workspace": "conscience64-platform",
+  "status": "candidate-not-cleared-for-publication",
+  "source_history": "Original checkouts and commits retained unchanged; this is a scoped snapshot, not rewritten history.",
+  "scope": {
+    "id": "conscience64-platform",
+    "name": "Conscience64",
+    "purpose": "Platform, recovery, navigation, analytics, and local model tooling",
+    "repositories": [
+      "conscience64"
+    ],
+    "source_roots": [
+      "conscience64/navigation",
+      "conscience64/analytics",
+      "conscience64/coordinate-space",
+      "conscience64/image-society",
+      "conscience64/public-testbed",
+      "conscience64/infra",
+      "conscience64/tools"
+    ],
+    "entry_points": [
+      "conscience64/README.md",
+      "conscience64/docs/architecture/API.md",
+      "conscience64/docs/operations/SITE_DATA_RECOVERY.md",
+      "conscience64/research/projects/model-experiments.md"
+    ],
+    "organization_action": "Preserve browser routes, encoded carriers, approval records, and projection source boundaries",
+    "workspace_directory": "redogit/workspaces/conscience64-platform"
+  },
+  "files": [
+    {
+      "path": "conscience64/analytics/.gitignore",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "713d69d531d13e839571d14f30389ed28ce50204",
+      "mode": "100644",
+      "sha256": "6183673cf613e9a4427f2a6950b8ff8ad41f189db64d62847d1ed87335ea13f4"
+    },
+    {
+      "path": "conscience64/analytics/CMakeLists.txt",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "aca5fe8a8825d14ff16bf4a8340bde5715ce1d01",
+      "mode": "100644",
+      "sha256": "52e7ad63cb51ce61ad75537b6b31d93fc9e93cf0273b8fc9fe5e7eabf9542f85"
+    },
+    {
+      "path": "conscience64/analytics/EVENT_SCHEMA.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "e308a21a59de06d2c892fe7b301ba1b4d2e01435",
+      "mode": "100644",
+      "sha256": "769aaf32954c750df95abce70ab5fd187c88a8cbb679ccc3e815de9d3e3c23aa"
+    },
+    {
+      "path": "conscience64/analytics/README.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "2867e1048cc5e36e74e575770ead29931996578e",
+      "mode": "100644",
+      "sha256": "befae1b15e095d5691d74508b66188762bfa6116dc072e746385ab732c31f6c6"
+    },
+    {
+      "path": "conscience64/analytics/dashboard.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "7c20276c5d7b0fa02c63c21233f4f5fe04fb4e2b",
+      "mode": "100644",
+      "sha256": "4909fc92c8d63c19a6d29aa2e26081ac152e2e6395650a1d88ad5c4869b231bb"
+    },
+    {
+      "path": "conscience64/analytics/event-contract.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "64353b406ce585b5d935ef4ba5401352152fc486",
+      "mode": "100644",
+      "sha256": "ac0ea3a0a3b83da42f969c77b5c6b48b685a85c019f6ae0d3528e060245e081d"
+    },
+    {
+      "path": "conscience64/analytics/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "7015c8b70a57bbb97d012c2df870a2a1299855d0",
+      "mode": "100644",
+      "sha256": "4ed5c91768bbabda8d2acb7cc826b5979ec3fb410f044b3bd98f275c9c62d266"
+    },
+    {
+      "path": "conscience64/analytics/llvm_event_bridge.cpp",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "f5ab24f3e706033554c85ce9cd242b958d280528",
+      "mode": "100644",
+      "sha256": "8fc9ad94f65445e872295cacd9185c16f0ec433f322a7ae9cf77a947ab72510b"
+    },
+    {
+      "path": "conscience64/analytics/recorded-events/2026-09-14-arcade-forge-admission.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "9bdd6207bba81796c4dac157ff7a932c4d905da2",
+      "mode": "100644",
+      "sha256": "80b3b992d5fb60c1ea09fe709baddf7263b685c0682c3108187ad0c4b0e645f9"
+    },
+    {
+      "path": "conscience64/analytics/recorded-events/2026-09-14-consolidation.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "26ee6a9fd1c35bdb8816acf07db446e95523aa7e",
+      "mode": "100644",
+      "sha256": "3f41314f6469b4995784ebe2a81ed1dae44dc559eacaae0ed2a8cd4fb855dba2"
+    },
+    {
+      "path": "conscience64/analytics/recorded-events/2026-09-14-coordinate-space-manifest-repair.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "d53007a4e2379b3db1047f89c436d961c5395692",
+      "mode": "100644",
+      "sha256": "a4aa744b8863ecbae06f4bb601ff32d95e4925407b279afbb3653f5fd8a9d07f"
+    },
+    {
+      "path": "conscience64/analytics/recorded-events/2026-09-14-starter-arcade-pack-deployment.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "dfdb046c06ce4745062899a22ac118930b57996f",
+      "mode": "100644",
+      "sha256": "958cf903045435390d2e9a6da54ba0a5fe1bf0ab2a6b828fb92ada3d46693f27"
+    },
+    {
+      "path": "conscience64/analytics/server.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "4d06bf27335a1ef48be48426d32aeecaa370b1f6",
+      "mode": "100644",
+      "sha256": "4234dc468c7e3c2bb1d0e5c66cddbd91b9c998d64e6430816bea0572a6ce5dec"
+    },
+    {
+      "path": "conscience64/analytics/styles.css",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "7c3dfd935437e5c705e05ed14bf5ea2beea6aadc",
+      "mode": "100644",
+      "sha256": "c8f7b0f3a4463597be25e0fe56ad547d152b5734392734a0cb0471f04adf8ba8"
+    },
+    {
+      "path": "conscience64/analytics/test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8a107138b1a9c01deaa75f9ec000edec544b8d51",
+      "mode": "100644",
+      "sha256": "839ef8e6f179ac1ced6ca70890b9d8f68418f29eb54b1ca41793fa1cf5949019"
+    },
+    {
+      "path": "conscience64/analytics/test_recorded_events.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "ee03a52eadb2b7f42d7be5f04bfdcb4165b9326d",
+      "mode": "100644",
+      "sha256": "80091665ba86c4a2f1b2188a704949098d581df4ebf0dd111c84e7117f43bbb4"
+    },
+    {
+      "path": "conscience64/analytics/test_server.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "dc3ba26f5c9c3cd5c0a74e1a5f57c6a3bcbf706b",
+      "mode": "100644",
+      "sha256": "df7af2bd4de148c782a2344838443854d21fa786201e23b61c5db13c484b8ff3"
+    },
+    {
+      "path": "conscience64/coordinate-space/COMPLETION_1_2_1.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "41a7ec3f7898350597492b6206f7e4da04f8c567",
+      "mode": "100644",
+      "sha256": "ecc74cc5ad2c6b91637d7d19db5c6ee8b28a596afa3060021fdc16c9b50a8ce2"
+    },
+    {
+      "path": "conscience64/coordinate-space/CULTURE_TIME_CONTRACT.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c070c88d666ec0dffcd4aa086e83c45e026e52ee",
+      "mode": "100644",
+      "sha256": "adf8492ee8fa5107be5582b9a962bcf2c1d3b0ea56cf92b433f255b07be75e16"
+    },
+    {
+      "path": "conscience64/coordinate-space/LICENSE",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3a0e797f03d00433ef06d3216d16f5d2f30d45ff",
+      "mode": "100644",
+      "sha256": "37ba7f81fe8880b9640b9e92218891acb1636525e61fc6ed67f59b971949a90b"
+    },
+    {
+      "path": "conscience64/coordinate-space/README.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "07a0bc7de5ba7fef1d0a68f3f39eab765148b042",
+      "mode": "100644",
+      "sha256": "b0fca49d61b0a2702dc8a4a04685c00a7b2b23db65fe987a4640909a9628dc4b"
+    },
+    {
+      "path": "conscience64/coordinate-space/UPDATE_v1_2.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "388f6913452d0e324b009ee256a6bd4c50330438",
+      "mode": "100644",
+      "sha256": "9db1ba5c42301e027de915920987f48c90f6c3d1c0a98dcd3259452df4f54a3a"
+    },
+    {
+      "path": "conscience64/coordinate-space/browser_checks.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "4a08da0d50fdf05192f65c0520d54c71faa69a99",
+      "mode": "100644",
+      "sha256": "19fd63e45d46ad1e0197c549059975cf9307fa0d619d44f4d9982cb0f3804d57"
+    },
+    {
+      "path": "conscience64/coordinate-space/codec.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a2cf33be1a91880834c9e8566b9fed21a7dfcd72",
+      "mode": "100644",
+      "sha256": "bddd295dbe53bb275642fc3f6259a1694f37808f2e97f96c5bd6689a9ac4ef01"
+    },
+    {
+      "path": "conscience64/coordinate-space/completion_browser_checks.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "738391389ad0c7553e3f33482cac407b68e7df2e",
+      "mode": "100644",
+      "sha256": "de05b6b4fffed68ee696a33cfe5b8ecfe3b0cf53c61a2c07d54166c77b5242fd"
+    },
+    {
+      "path": "conscience64/coordinate-space/coordinate_runtime.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "321466167d17d97c20f22ea134e6196fd80302c1",
+      "mode": "100644",
+      "sha256": "137840583674a590aa2d471eaf45ae6cbe90bde5e71e486aa49592522f3cf3c3"
+    },
+    {
+      "path": "conscience64/coordinate-space/culture_browser_checks.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "23ef922365e71bc40e1c3c15aaf63f50113f8f29",
+      "mode": "100644",
+      "sha256": "f11cb506ea2845e54ce0b8f77fe68211bd98216cd4b42008cefc031b33cee506"
+    },
+    {
+      "path": "conscience64/coordinate-space/example.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "d48cee770af79c473b5e2e64659cfc712c5d75c6",
+      "mode": "100644",
+      "sha256": "254218068cc59abd5b17d956f2269985c1922be983dbdd017806b4a3234b11de"
+    },
+    {
+      "path": "conscience64/coordinate-space/float64_coordinate_builder.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "832337bc1b3bbfb33bd15984a415e3b64b9b16e5",
+      "mode": "100644",
+      "sha256": "cabb18665bdad165b110b67453be7b04cc71d83fa5a91598276d768b98a8f41e"
+    },
+    {
+      "path": "conscience64/coordinate-space/i18n.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "9934b65a06b4811267aaf75fb5d22a55d617d2c8",
+      "mode": "100644",
+      "sha256": "ba415ee059c445fceb1a93b66666482a3952ceebf7c6019ec7b68701d68ac9b9"
+    },
+    {
+      "path": "conscience64/coordinate-space/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a3fa39e9958201230bb7ebbe1b2ec636836f9541",
+      "mode": "100644",
+      "sha256": "2eafb385f64a95d8d27a6568e7481ad3acb4cfc6d9046e9d38b936185a1bc9f1"
+    },
+    {
+      "path": "conscience64/coordinate-space/intake_browser_checks.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8b64d172b15b9a4fa16a5a94a0727628cfbb228f",
+      "mode": "100644",
+      "sha256": "6883763ac0abdeed57fd601bdced1a862f279893e71ab7d84c7133d1b010b08c"
+    },
+    {
+      "path": "conscience64/coordinate-space/locales.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "59aa42d2b1bbbdbc4d563a14ef4989652aec484a",
+      "mode": "100644",
+      "sha256": "f80e9380bfee4308480b94661e419c6013698a55117e7201f8b331c7c23538ff"
+    },
+    {
+      "path": "conscience64/coordinate-space/release_manifest.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "818796cc8e8a97c9aac2fcb46da862e2f4053a08",
+      "mode": "100644",
+      "sha256": "893a26a7e75800886e21476f8959c6589271cb940dcf0f243e787d27ac628762"
+    },
+    {
+      "path": "conscience64/coordinate-space/requirements.txt",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "72ee6ee4e87364467a07b5e1e3366c75765767d5",
+      "mode": "100644",
+      "sha256": "7466ba49fcf8fa63d6b7847c1537bcf072c5a021eb804be97636b3b8a1ce9bf9"
+    },
+    {
+      "path": "conscience64/coordinate-space/sha256.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "5e2d9667d7c2a44c5602710fd2a3350cfe529202",
+      "mode": "100644",
+      "sha256": "29179f0f61206751a89301ab28cb6ec618092fcb620b7c5509fc43c5be153390"
+    },
+    {
+      "path": "conscience64/coordinate-space/source_file.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "55eb008b2610a4721b812b7246eca1274fbfa49c",
+      "mode": "100644",
+      "sha256": "0861a427406b6d15939cd8ee5e61d6d0e99cf25ad5463946d5a225e82a8e7581"
+    },
+    {
+      "path": "conscience64/coordinate-space/test_codec.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "df4b7e0c108b684ec987459a1a36c080b01cfb73",
+      "mode": "100644",
+      "sha256": "3a84d0bf54631862ec4b02076f903136df1a4a18ba5329fbcf155a1cd646382d"
+    },
+    {
+      "path": "conscience64/coordinate-space/test_culture.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "87fb5f60b6df6a4de21fef61642d713b090609e5",
+      "mode": "100644",
+      "sha256": "bd38fbb39eba704b21a5f61d87ed6dbef34819cf6c9fcb311d923b1c81b3829e"
+    },
+    {
+      "path": "conscience64/coordinate-space/test_public.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "462268dcd515325efbe8ac1c17de06694a066ff0",
+      "mode": "100644",
+      "sha256": "3b47acfe0187c377a4d8a72e56184db23cf7d669570d5e48f28ad5a12fcf6362"
+    },
+    {
+      "path": "conscience64/coordinate-space/test_source_file.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "d10408d32d8e25c3444168f1e9f61c89e6a423e8",
+      "mode": "100644",
+      "sha256": "0b4f66b77860c54ae3f43879a7ef7bff85c67f468d3e3b66b5825404f82ab05b"
+    },
+    {
+      "path": "conscience64/coordinate-space/ui.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "f2bbd19bf64405cc98ced22ddd77d9085ecd509c",
+      "mode": "100644",
+      "sha256": "5b52e3f317bd9706ea1b50a60ffe10109c73ea8192813c8c4a5d3e33cecfa96f"
+    },
+    {
+      "path": "conscience64/coordinate-space/unicode_crosscheck.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "cf5b262d4442d206c14860c60cab17b19144a7bf",
+      "mode": "100644",
+      "sha256": "ecd68a601c712271f86c337b58ce2ec37588c802ad8b404dc404290c40ae73ed"
+    },
+    {
+      "path": "conscience64/coordinate-space/utf8_symbol_registry.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c9cac94b56d44ed236fd0ca85e495d59565b49d9",
+      "mode": "100644",
+      "sha256": "8fcd67f4077267817b29d9d84db22981550edece78d368b2cd1d2eb4751e0016"
+    },
+    {
+      "path": "conscience64/coordinate-space/verify_release.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "1dd02041787a42e71c716f6e6bbf9685a8acb947",
+      "mode": "100644",
+      "sha256": "ed62c2ffea104fbbc1460c08c58b9ccaece436ab8ec950059cd4a4371521a02e"
+    },
+    {
+      "path": "conscience64/docs/architecture/API.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b3e053bc27a15b1aedbc6354081a83a6af824efb",
+      "mode": "100644",
+      "sha256": "687f7ab372c3c54fb18d68b9fbdc061e6f64c4ebd976988a04b0c70b984f9db6"
+    },
+    {
+      "path": "conscience64/docs/operations/SITE_DATA_RECOVERY.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a3ce44d2caa9170eb3c9e1a1c29c3d09a57af863",
+      "mode": "100644",
+      "sha256": "556c55f30b35045470ec30ca0a200d069358520bdf35cdbac5d4ed40655d7de6"
+    },
+    {
+      "path": "conscience64/image-society/README.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "18ce4d1c35c87db49d70fb23c5f620e9677d0fff",
+      "mode": "100644",
+      "sha256": "527beda92b09892edc0cb4c426ae09589deb50c784520b4775444101e6c2070e"
+    },
+    {
+      "path": "conscience64/image-society/RUNBOOK_1000_CALLS.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b9959ca157282b0b37dffb0c0ca56fc9f23fd8f5",
+      "mode": "100644",
+      "sha256": "0713d0174603f16704c51a7230a78bf26b1dbf7cb4662209c2378c55992bff02"
+    },
+    {
+      "path": "conscience64/image-society/artifacts.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "bde411a1dd561d9e2525f4483dc92e0b34c5a77e",
+      "mode": "100644",
+      "sha256": "9ec5c4ccf74a2fb03c2c90523a321c1f5a2e79eec92c6b701b002b32bf9f755b"
+    },
+    {
+      "path": "conscience64/image-society/canonical.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "fc5ed5bdbad179ec1c6a856f595c1b37d667c005",
+      "mode": "100644",
+      "sha256": "7f602f31a9a1a22119a7258523b32ff706aeb703e3e86db7c572273841398b7f"
+    },
+    {
+      "path": "conscience64/image-society/checkpoint.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "194e1754571b9c720283d950aa6f93bc4815c633",
+      "mode": "100644",
+      "sha256": "9390c610ebde29a7707bfb552f3c71d85cac21ff8a64b809798b4de7a474e971"
+    },
+    {
+      "path": "conscience64/image-society/contracts.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "dd9e61555cb885decb1641958a4984019d74844d",
+      "mode": "100644",
+      "sha256": "980118725226ec977ed1caab258c4f499faf1cdca6be286ad6de767747c6980e"
+    },
+    {
+      "path": "conscience64/image-society/gates.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "68ed5991b4e02184e903396721244e30543fcd88",
+      "mode": "100644",
+      "sha256": "19e8dff184681c56b168d0958106ddc532a055481fdfeadb12c7f40d088e8e4e"
+    },
+    {
+      "path": "conscience64/image-society/image-society.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "2b96d9efae22c75fd3272c09b64d425bef7c8a71",
+      "mode": "100644",
+      "sha256": "37e25c54f50d42b8b27fcadb7053bd6aab810e92240250013cb0f7ab7cfae44e"
+    },
+    {
+      "path": "conscience64/image-society/ledger.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "9f11a74729c94b27be0f1d8805e0aa18c876ff44",
+      "mode": "100644",
+      "sha256": "4d9706a18c2b373a981542d1abb6c1e0861139a0c1c176dbb7b69fa938e438e2"
+    },
+    {
+      "path": "conscience64/image-society/prompts.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "03cba05603b08557cc052241585e0a70f751062a",
+      "mode": "100644",
+      "sha256": "07a3a7c191761b31e4e94a459d3ca110e2e7db3c7efec7f5b8c94c9280c0581e"
+    },
+    {
+      "path": "conscience64/image-society/prompts/production-image-profile.v1.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "f18b248da70d52de1d27ddef8e9a1ba358aa2879",
+      "mode": "100644",
+      "sha256": "f7d3d62c18bba4afdb94239ee0e5b944c4b13644f4990a3f2196976756db8aaf"
+    },
+    {
+      "path": "conscience64/image-society/prompts/role-prompts.v1.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8654c6cb15dc5d8f6f32ccda48ef982ab997083f",
+      "mode": "100644",
+      "sha256": "795bd49082eacfe50b3daceb31c47a09f4ed112f30fd81a6ac427baff2ca443c"
+    },
+    {
+      "path": "conscience64/image-society/provider-adapter.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b4451cd0cc9f9d955b4fcb7aa58fb6f540e84666",
+      "mode": "100644",
+      "sha256": "4f9bfcab7ad248f42faba16a51e48da788e38bdda5ab3560229f84aa70c767f3"
+    },
+    {
+      "path": "conscience64/image-society/regression.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "181732a0a1b1190a0eb6ee0233acfc28fc5e5360",
+      "mode": "100644",
+      "sha256": "6f37a1661a826f2cee5d0327800c1a8893377d6ed4f3656a36a264a77753e440"
+    },
+    {
+      "path": "conscience64/image-society/scale.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c3d166b32d73bce28e827973f329e799211531c5",
+      "mode": "100644",
+      "sha256": "7e41c4926fdb5eb8d6bf4fcad710741d9215ac09406c4d85467aca3c0e1868ff"
+    },
+    {
+      "path": "conscience64/image-society/scheduler.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "eb207352da2057ec3e9d6c901d03aec1feffe82f",
+      "mode": "100644",
+      "sha256": "4490e2504e01f1772a593d734b68a68881421eeba90ca755db2e1bb8bc824cf6"
+    },
+    {
+      "path": "conscience64/image-society/scheduler.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3c5a9d1ff4feb588616402c2356ee012952cc343",
+      "mode": "100644",
+      "sha256": "11ab7e40a7b81495cf93ccc56c10aac6d3da1096a8ea99236941af72bcece785"
+    },
+    {
+      "path": "conscience64/image-society/schema-runtime.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "768a1e816d5f240b16102ccbe15c9e753ad06504",
+      "mode": "100644",
+      "sha256": "0ecdd3a32dad7f43ffd3085c9afe4c77193a7f3157ba33e6a870cd4bc2c897e7"
+    },
+    {
+      "path": "conscience64/image-society/schema/image-society.v1.schema.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "5279bccdaf5ad071c7c9ccfb1c67b8fdc34effca",
+      "mode": "100644",
+      "sha256": "671c9dcf37d2613c4dbabbbf4bb85e7e4deac87947fe9a775bdc1d84b5248698"
+    },
+    {
+      "path": "conscience64/image-society/schema/run-manifest.example.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "01a99cf09209be9d141131964653ea86d12c6bc2",
+      "mode": "100644",
+      "sha256": "e22d3422fe87290df6d2604d488f4919661cb50fb4072e72d368cd12e1b7a5fd"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/Corefile",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "fe85284be7d6f627ffaabcc412552b559f516fbf",
+      "mode": "100644",
+      "sha256": "9f90ea13044c783fe486fd55c3315155d15f54f85b94d252636729044b44fc4f"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/README.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3377756b93621f1f4acd8a992f19e0accdcaedfa",
+      "mode": "100644",
+      "sha256": "c46a223c6d06961bd33212a5eb1867abbd07b7730c238de3ffcd2dc85620c901"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/compose.yaml",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c495a4466c6a6b2c6b0dff6b30f3f6294594686d",
+      "mode": "100644",
+      "sha256": "2f092ae8f3e052d9c4af4ab15261c2b9a5b7cea0ac5b13aae5d64c8e323a822c"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/db.beta.internal",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "2d25ff07c71a640fd38fb7f70f78e9f0cb5e5c32",
+      "mode": "100644",
+      "sha256": "33fd5c5147df5e08341ae8e91252d377fa4e4135b2da974afe04eb0dda3e5514"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/probe_dns.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "4206c332410cc5504a2868df7952992ddc8a3b30",
+      "mode": "100755",
+      "sha256": "7756bbad6b42555213e687c84d769f2b3f730be8490f1678aa3e8a4d55ceaaaf"
+    },
+    {
+      "path": "conscience64/infra/internal-dns/verify_config.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3298e5d7433f60965409a4d37a6e2bd6b0240059",
+      "mode": "100644",
+      "sha256": "6e651e220e8a03c04d8280e2b489ad9d3d56635976cc067753390b4bf5121dbd"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/WORK_INVENTORY.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "360363cb73376d546bdadd2b0111224858f73808",
+      "mode": "100644",
+      "sha256": "feff42c9c7048830e3cdaafcb3e9abe0bd5bee8410dd09d048575d46408055e5"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/browser-test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "03e2ac37e0f7e8988f932db2c95f59c4e9ac0013",
+      "mode": "100644",
+      "sha256": "c25815e11c5bc5106d1054f79ce1373775966444028772d87476f146b8275d39"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/context-horizon.css",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "84017ecc3e30daeb2bf28aa091f34067a3f4ee29",
+      "mode": "100644",
+      "sha256": "aa91a6faa0f34fcbe31c64fcf3eea6d78f4089e36c01d494c64d9f0fdbf2c746"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/cross-chat-context-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "24e4f1d2f90b5b7dc48b2668e9a3d764f6fdff86",
+      "mode": "100644",
+      "sha256": "1e93a0abe325d006e049e0a83f5dad64fb3e5d6c5494165ac9d2fabdb6a93925"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/current-chat-artifact-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b83cc629c6e143cd866d6cf56fb627b9c7af9053",
+      "mode": "100644",
+      "sha256": "19c0b82c50419b8d09c4e9558a07522c97ac048ccc53d62afd205a204bb998b0"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/current-chat-artifacts.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "82fb419056ba1287dd4ff225904db144cf84388d",
+      "mode": "100644",
+      "sha256": "e37e35e5efdce4f43bf84fce4c37f11c38cfeee1fd87915d76a57a11ecf0784b"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/engine.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6ee2816acd91e8facf7d1b1cb78da93df298a4d2",
+      "mode": "100644",
+      "sha256": "98e0e3492ec2398aaa02e7b27dc580e4e66e77994e9cacba5ed50c297c073ad7"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/engine.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "51a6802ff0a8d6a58d9e7ec3e25ce054fd2abf72",
+      "mode": "100644",
+      "sha256": "62d4d543abac852297a87a9e84724735f683b0b7feb36d26aaf8f1f85e68818f"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/external-public-sources.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "019b726e982d879f4bcbac56b7115ebb69f20c34",
+      "mode": "100644",
+      "sha256": "7139cf698eb84ccdb25acd040052c0ab149ce0b1f9c7e02e9d5b6538d18f50bc"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/historical-context-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c9b40d0b48fa66532a68b936429b533810c52893",
+      "mode": "100644",
+      "sha256": "92eae0944107055db4fa3afd747d65850a71e98e203f09ae5e9e8ba7e20cc898"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "03feeca34d5fa5f15929beba73cd7100b53a672e",
+      "mode": "100644",
+      "sha256": "6b24ac34373a1838e35a92564cd2395500c17308ded3c8cecfc515fe45bdd227"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/library-discovery-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "49562b0368bc21d3b45a7b648f98a59115da26af",
+      "mode": "100644",
+      "sha256": "22ef82f4529a09f1808683373246ba9de0ee797829eaf702a05158b5b4adf216"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/library-work-expansion.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "5a46ca7eae81d3e6fe020b883ba8631cf8d99a75",
+      "mode": "100644",
+      "sha256": "fa0944a68e373665811ce734a35c6f4dfa8755371827bbbcfca52ef14de24c55"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/named-architecture-expansion.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b184928050044e7da08c581cab2e1bf94d5579f8",
+      "mode": "100644",
+      "sha256": "71abdac1134d13e28acfa7d640be00b9b5a4292d1f420dc1e0e1f327fe4d6e68"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/named-architecture-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6f4dd26b3040b19690bdafef57485a8fca3f61eb",
+      "mode": "100644",
+      "sha256": "b4b30ce8661f2549fc5a2197c81e084e26cc8f68a1f14f2e2c9d61ea5e2f1fb6"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/page-adapter.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "93c04a45ad5baf44bbe26adbdba10995b8965487",
+      "mode": "100644",
+      "sha256": "37f8543adbac51d48151302e876fde36163dc4e50a25caa6a1d6f91272efa52e"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/presenter.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6c5d0f6976974caeb2bf6b9f950758ea3415d1fd",
+      "mode": "100644",
+      "sha256": "7d597ce2d629fc1aa74e39589febded43291b127db37d9237f0dcc24d343cd69"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/preservation-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "5b70edbe3ef8cbcd10d2382327146f064987692c",
+      "mode": "100644",
+      "sha256": "997551501337cd631e9f36d399cd035f87ccaed86bac93173a7bc38505c21c50"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/questions.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "657dad239c0b47b2b8736851f8c562a5ffa79775",
+      "mode": "100644",
+      "sha256": "41adfd3d205d6caeadf6bb36c99fdc5471a0da56d73c57a5f57bfa140bae8717"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/questions.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "9398a348dca7907dc6a68277a9f29f47f74df8f1",
+      "mode": "100644",
+      "sha256": "a9e65329c1926a64849406dc3c89d6930b6e928c95823f9de62541961b82e420"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/repair-successor-seeds.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "7b8530b0f4ff47972b20b5304bcab21550173f8f",
+      "mode": "100644",
+      "sha256": "bd5739746dc4f809980ae99e3d75843008f4578af7a409df8fa6fb3ec80a35f2"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/repair-successors.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "e7be15489609e7f067b8714a9ea0c85be3f656bc",
+      "mode": "100644",
+      "sha256": "ae4bf845aff3e08101de28a6e6c0d301d41f74db23abf23a6c4b6782fc20d185"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/route-registry.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "1ca67cb4c066400b44fd07d0a0e7beff9a83d367",
+      "mode": "100644",
+      "sha256": "9bfe6e842442e92e93c9b5cceb73e3ddfe4e01ffab32b48c6a495dd4e738ec8d"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/route-registry.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "cd4b512014b37954d417a732d3a35531cb167399",
+      "mode": "100644",
+      "sha256": "3cb7d8320b84449c6685abbeed1427d7de6fed6254853450f2eef27fa79c6fe3"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/work-inventory.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b950e804bedfc854f6f6908b3c5183d3032187b4",
+      "mode": "100644",
+      "sha256": "39b85774048be68a802e0e308829eca840f86e10c907aa465d34cfe992c813d0"
+    },
+    {
+      "path": "conscience64/navigation/context-horizon/work-inventory.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6eebca7fb2651bf89f7954ab103f091399b2172a",
+      "mode": "100644",
+      "sha256": "9dcac9a84d37d7dc3f3ef8371a3ebc228063508032067cb8e4c7c3ecbb1009c5"
+    },
+    {
+      "path": "conscience64/public-testbed/README.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a00921741d3b31461ad9a301d4ac7db58e02edff",
+      "mode": "100644",
+      "sha256": "05c71534fcebc66cb759ef014c05b24012affd15a94e6f5af2439dbe5fb74df7"
+    },
+    {
+      "path": "conscience64/public-testbed/site/app.js",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "e6c1bd5c5f3f050c01abce4ccc82f33cb789b0e3",
+      "mode": "100644",
+      "sha256": "fa0bbbaadb4b7d5bbedd8597c649e4e90f7df49da774d4c39f2f0455c2834d41"
+    },
+    {
+      "path": "conscience64/public-testbed/site/carrier-surface/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "ac7675f03be3da4d5f99dd7886353582dd0e6a27",
+      "mode": "100644",
+      "sha256": "bc665119f82c21895194aef0d7e674d5bb89ef53d5d36a426fc660b2ff5c12c8"
+    },
+    {
+      "path": "conscience64/public-testbed/site/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3cb0b044ac538c5d0bae40880d3fb6c951b1d08d",
+      "mode": "100644",
+      "sha256": "0d03438cdb924f0ce45cd68a750e60788db8aaddbbee97b319f8109d7895b3c9"
+    },
+    {
+      "path": "conscience64/public-testbed/site/s1-models/index.html",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "01f9365266ccf2033b4ebd7e3d8e28b45a84ab5b",
+      "mode": "100644",
+      "sha256": "88a416ae549849369ee8ab280aacfe6e92878f99270d9f7648022c61e9b01e25"
+    },
+    {
+      "path": "conscience64/public-testbed/site/style.css",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "cd2c240c4bff29b03a4666baa0ccc4225616ef47",
+      "mode": "100644",
+      "sha256": "3390ab2afc05e2da9b63e765e4df5cb70b97a1e3ce9d72bc339fea4e13e80f76"
+    },
+    {
+      "path": "conscience64/public-testbed/testbed.json",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "ca3b70f3578ba9cac57fd30809ecb4b8a72e73f8",
+      "mode": "100644",
+      "sha256": "c15c5e4311efd9c0262a83a7d473f3dab118b587f13bc3543495c6877f5370e2"
+    },
+    {
+      "path": "conscience64/research/projects/model-experiments.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "010dd22b42facd4035f435c03c5a8405adce7bb4",
+      "mode": "100644",
+      "sha256": "ffd36c33b4a22b698c08724518c9b669e036fe3fca509b5703ed24e02281688f"
+    },
+    {
+      "path": "conscience64/tools/HYPOTHESIS_ALGORITHM_BUILDER.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a43fe7ffdc98b046f3e7b2c8c7c57cd78a7498d5",
+      "mode": "100644",
+      "sha256": "116f2e72011644663026ec80c7658183821a4cede924e7f3d49139bc008fe74c"
+    },
+    {
+      "path": "conscience64/tools/SEMANTIC_APPLICABILITY_GATE.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "14cd44f329a93e5ae64bb83b352eb65789f1dfda",
+      "mode": "100644",
+      "sha256": "351601f1f047f50673edf077f9181eee3030d933445f7a41e81add70d7b63804"
+    },
+    {
+      "path": "conscience64/tools/SEMANTIC_CROSS_REFERENCE_MAP.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "166023737e25af023b608fd0acc8561867ec3677",
+      "mode": "100644",
+      "sha256": "5e634207f32ab53ccb545143bb1bfbf824ed989e85288f5351aacaec171c8a4c"
+    },
+    {
+      "path": "conscience64/tools/SEMANTIC_SITUATION_QUERY.md",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "45a7a4aa6b0be666b06f0aafd52080a9132362aa",
+      "mode": "100644",
+      "sha256": "11d484ed514d370f2b2bf1c593dded77d02f678289a1e33875934a1b409cc94e"
+    },
+    {
+      "path": "conscience64/tools/add-dream-pages.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "fcf94ed91bb028b2be497575602e099fc92cc54f",
+      "mode": "100644",
+      "sha256": "ed3b1b86dc083617330182daaec7c22b811156fd7696bdc732f2b857777b6478"
+    },
+    {
+      "path": "conscience64/tools/build-public-testbed.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "496b35cf28656d89384f54c878889a033d5dd1c5",
+      "mode": "100644",
+      "sha256": "f5d24a0998d7a9befd1f000911fa8aa9b90c4dfb97d2b749edf973bd97b72fcc"
+    },
+    {
+      "path": "conscience64/tools/build-semantic-corpus-map.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b4e143833599a85fc79f86703467db0086f25329",
+      "mode": "100644",
+      "sha256": "9948db7d1fd4bf339ad4162496e6c4aa2e469965d08e3d8871d3a93b422f735e"
+    },
+    {
+      "path": "conscience64/tools/check-neon-veil-release.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "05f5e2ca609428870e88484f2e033f6251175420",
+      "mode": "100644",
+      "sha256": "dddb17f2a04c92aa95c5a4277179004ba613051f35166badc9a7882ac163f2eb"
+    },
+    {
+      "path": "conscience64/tools/check-public-testbed-edge.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "ef0d9f91260ffb0a5365e1d0a30d5e464c630145",
+      "mode": "100644",
+      "sha256": "b740f97b5d107918f61559a857337c883a580301802f5cbf49ac2461352bc61b"
+    },
+    {
+      "path": "conscience64/tools/check_cooperative_field.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "bb4f88a2e8d65b78f629471f283b1aa833177d4d",
+      "mode": "100644",
+      "sha256": "40150a9fa206635aa584c76eae2db49c87fbd9445e08f1ab263f4b8fad3a3329"
+    },
+    {
+      "path": "conscience64/tools/check_pages_sync.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6e84b3c816689afe9d914cbe8b51a374c439ec64",
+      "mode": "100644",
+      "sha256": "3aa64270159ed6a7d170c743ccd8cbbd3f6be7100de476721dc8284c56649f59"
+    },
+    {
+      "path": "conscience64/tools/check_project_current.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6eb15939a7d9048cf7450b771542964500aa1209",
+      "mode": "100644",
+      "sha256": "e51933894447a3e3c656b4a70ff8de1e156fe841a1f98a2e0f50eac0f2c569f0"
+    },
+    {
+      "path": "conscience64/tools/check_project_registry.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "33ba4a98da4467e4f0d9a552d232cfe65ddcf942",
+      "mode": "100644",
+      "sha256": "9d25377da4b63908216df65ed7571467d65c3eaa42365e03a42d80d75b388c74"
+    },
+    {
+      "path": "conscience64/tools/check_public_reference_aliases.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "842236b454791c502501b04018c66fc5759fc206",
+      "mode": "100644",
+      "sha256": "5494b029017203e1723695f93fdfadae80a3ddece597729eb383a7db33915744"
+    },
+    {
+      "path": "conscience64/tools/check_public_routes.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "fa7271ceedf2b3b5ab8b646ff4a870281ddb058a",
+      "mode": "100644",
+      "sha256": "8c126b5c31f0a1afe37c96a27959ba19c7fe1481402f45d30dd43065ab61e4c4"
+    },
+    {
+      "path": "conscience64/tools/check_site.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8ef7b3c29725fdd04db529654e4c6698cb05b7b3",
+      "mode": "100644",
+      "sha256": "26282c2831e785cb156d074fa3c9924c67da105150f61e258716a557577196d7"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_external_gate.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "02ae16ccc09079c6975c7ee5bc2305cb4ed24a1b",
+      "mode": "100644",
+      "sha256": "e09928379e08a867066ff377eec9a2a8d6a7e2e0ac533943f15ba484109b2f32"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_human_builder.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3de1753f75635fe94337d02be62b181c2c881ed9",
+      "mode": "100644",
+      "sha256": "d1371e8da043a9e30d56e62aa71a605fc581e3bc33d6f7df93745e57b59c1a49"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_local_search.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "4bc48a900ffb28b5f9dd655facdab66c740e32dc",
+      "mode": "100644",
+      "sha256": "5fb2a411c03a0a0f86d08806cf9fe816f30a0be17062202e40beeb6f26272ddb"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_memory.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "cc46b81090709907dadd8877d852bd20c8c2d448",
+      "mode": "100644",
+      "sha256": "a30ad2dc10a734282d6cf6d4ac0034ba7af0df045007ef324741849099bb02aa"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_qa.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "b1d1a21da1253b8f3581e1c8d3e27e4fe2d7b769",
+      "mode": "100644",
+      "sha256": "c4e03aa8a4975ce2291b6962deb5b5507c78b94fe3b16556f266e5246ff90737"
+    },
+    {
+      "path": "conscience64/tools/check_space_lens_web_search.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6556d4e3a2da39f4df36950b18efe9a40830c2e9",
+      "mode": "100644",
+      "sha256": "07286ce3461963db1508a3fd42b9ce0113836defb712350c624bfecc893d0633"
+    },
+    {
+      "path": "conscience64/tools/check_voice_anywhere.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "fc8f5cad6cb8f3a16e53d120a93a024710247b6f",
+      "mode": "100644",
+      "sha256": "c52b4b4b06074af2f7eaaa572c53d10d6a50e5c8c3b230f9d08f0ed2c127acb1"
+    },
+    {
+      "path": "conscience64/tools/generate-reference-aliases.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "0e8576b22c4e30cf0c8cdc57d6acb379bf36af8a",
+      "mode": "100644",
+      "sha256": "8ccbcbb0ae056de9353a753c7982a33eb997519d022593570697f5b5630bffce"
+    },
+    {
+      "path": "conscience64/tools/hypothesis-algorithm-builder.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c0a82f79408d97581829571023c2f4781869cd1f",
+      "mode": "100644",
+      "sha256": "6bacb730d5defaa10fc4357ed9f32c92d1396e440e0a8639f9dd4c23d831efbc"
+    },
+    {
+      "path": "conscience64/tools/hypothesis-algorithm-builder.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "28516b60ca42dfa712f2b65f1ea27ff7b4a317cb",
+      "mode": "100644",
+      "sha256": "a4e12fe8b7012fac372428b57981ad836cee6c84a20b69c3813661e0eba28127"
+    },
+    {
+      "path": "conscience64/tools/private-origin-boundary.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "bae3f2182e1a93cd3ddd249af374b2b20b24723c",
+      "mode": "100644",
+      "sha256": "d502b464f6a665eead922553a3a431096c7055cad82e3ae88823cc9b8ab08751"
+    },
+    {
+      "path": "conscience64/tools/private-origin-boundary.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "70431d1fbcfb70d91928028ed51c293ab45290d1",
+      "mode": "100644",
+      "sha256": "164d4ffef64659d5468685296698fdb9270dfbbffea03c77a48da5a630b532cd"
+    },
+    {
+      "path": "conscience64/tools/public-routes.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "51a4324e22dc9171e7b4a34245bbf167c866f524",
+      "mode": "100644",
+      "sha256": "4fccb2e63094b005e792ac8e506b07a07d0c9e493d51e22bfae148b6f52dcfb2"
+    },
+    {
+      "path": "conscience64/tools/public-routes.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "72932815e85a111885a5da259557e82746c1c215",
+      "mode": "100644",
+      "sha256": "ccc2ae8c008906b97c39da00fce1886413a750b80c659dd0e6e2914eaf84f8bc"
+    },
+    {
+      "path": "conscience64/tools/query-semantic-corpus.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c2a68bdc707c966a15687eca648d07ef6281bfcf",
+      "mode": "100644",
+      "sha256": "91ceb1ab7f9aaa344bb68e5584ae4a32fa84399861ebd0842f2fd9a1645323e3"
+    },
+    {
+      "path": "conscience64/tools/rebuild_site_data.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8ca7345b7932dd292c67a3f91d0f76ac3d3016d0",
+      "mode": "100644",
+      "sha256": "8884551e25c6f7dcaee68c17bedaea674b29b5d3a3f2136c5fe23c3d1e6de89f"
+    },
+    {
+      "path": "conscience64/tools/redogit_selfcheck.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6a279e1b63967a552174578db7c420965395435a",
+      "mode": "100644",
+      "sha256": "66ac0b356913e93ac2f91daa99c3bffe08477bad73edd93505c240f7ab791431"
+    },
+    {
+      "path": "conscience64/tools/run-hypothesis-algorithm-builder.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "a0322c51de31f1ed877a94b0e65b9ef532f998b0",
+      "mode": "100644",
+      "sha256": "553ce3c235ebfa190af36de39c99a1842315978fca1841d114c9dffcb4389dde"
+    },
+    {
+      "path": "conscience64/tools/run-image-society.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "6f518bf1c8e49eb168a79fa4bac22f9a72b5483f",
+      "mode": "100644",
+      "sha256": "4ae42f75ccd234e6c8ead834ef97f1679583734ffab1bf67db1c4035b8f0571c"
+    },
+    {
+      "path": "conscience64/tools/semantic-applicability.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "7f96df67eed1646db5c813039c729bb7154b3311",
+      "mode": "100644",
+      "sha256": "1b02913a2ca9771aaae6144b904f95c7f9024df0e86ca7c7c54e0283fc232961"
+    },
+    {
+      "path": "conscience64/tools/semantic-applicability.test.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "3bc821eb4ef026dc9274781b96901d0611c6fff5",
+      "mode": "100644",
+      "sha256": "a7b95f116b245a0fd446916e41771662c06cdab80dec856fbf3271a8e17e9d38"
+    },
+    {
+      "path": "conscience64/tools/semantic-corpus.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "ef0f83a06c315fdaa576a3076a76de693e0f26fc",
+      "mode": "100644",
+      "sha256": "bdc5bdaa1538a2187f44a1ddd00df267ea9c368fe27b5ed18ff543d2c228516e"
+    },
+    {
+      "path": "conscience64/tools/semantic-crossref.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "091bfe6d6b140eb325e96f55485816d9ff47ca50",
+      "mode": "100644",
+      "sha256": "f874b27b770e57886bddfc8d5948a14071676901f3a965e9268b4f935adf110c"
+    },
+    {
+      "path": "conscience64/tools/semantic-query.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "e1d8e346d33f5e3d829ad71a17bc903ed0b792a4",
+      "mode": "100644",
+      "sha256": "eb12b47aa76968001778a9da8fcc52d5fdd66c151564d074fb44812942aacf4a"
+    },
+    {
+      "path": "conscience64/tools/semantic-routing.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "2ddd1208801a6f62236b7f4b1960cf29f90ecb2e",
+      "mode": "100644",
+      "sha256": "74be10ae127c08d5a9db18457a7bc0ca610d0a9c14d5b131844cc0078a63313b"
+    },
+    {
+      "path": "conscience64/tools/test-image-gen.mjs",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "8300756e6325255bf48a9fa5737dcef0f40421be",
+      "mode": "100644",
+      "sha256": "06444a102e55d17741465a77c8db3f0c8c4cad450c1681186d4f82111ab96259"
+    },
+    {
+      "path": "conscience64/tools/verify_research_manifest.py",
+      "source_repository": "conscience64",
+      "source_revision": "e58fd1cf1958a3744ba840d82da753597cf0102d",
+      "git_blob": "c2d9fa74dfa31416f5bd1b146da2f7297adc1d76",
+      "mode": "100644",
+      "sha256": "f7d596428d8704634b835a0ca1e8e9ef40c66cd6ed1cafb76d25266bddf89772"
+    }
+  ],
+  "limitations": [
+    "Scope manifest is a navigation scope, not a standalone dependency closure.",
+    "No source bytes or historical evidence rewritten.",
+    "Public content clearance and standalone validation are incomplete.",
+    "Original 740 passing tests and two skips have not been replayed."
+  ]
+}

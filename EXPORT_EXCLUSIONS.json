@@ -1,0 +1,20 @@
+{
+  "policy": "Keep all fifteen original exclusions absent; no private sharing approval inferred.",
+  "excluded_source_paths": [
+    "conscience64/README.md",
+    "conscience64/play/fuzzball-hidden/README.md",
+    "conscience64/play/fuzzball-hidden/game.mjs",
+    "conscience64/play/fuzzball-hidden/index.html",
+    "conscience64/play/fuzzball-hidden/styles.css",
+    "conscience64/play/fuzzball-hidden/test.mjs",
+    "conscience64/play/fuzzball-hidden/world.mjs",
+    "conscience64/research/projects/public-updates/README.md",
+    "conscience64/research/projects/public-updates/test_public_updates.py",
+    "conscience64/tools/check-public-testbed.mjs",
+    "conscience64/tools/semantic-corpus.test.mjs",
+    "conscience64/tools/semantic-crossref.test.mjs",
+    "conscience64/tools/semantic-query.test.mjs",
+    "redogit/docs/coordination/LIBRARIES_OF_LIBRARIES_GIT_LINEAGE_2026-09-19.md",
+    "redogit/docs/coordination/LIBRARIES_OF_LIBRARIES_RMAL_BUILD_2026-09-19.md"
+  ]
+}

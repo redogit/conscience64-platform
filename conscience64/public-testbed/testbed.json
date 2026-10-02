@@ -1,0 +1,282 @@
+{
+  "schema": "conscience64.public-testbed-source/v0",
+  "marker": "31173",
+  "title": "Conscience64 Public Experimental Test Bed",
+  "authority": "experimental-non-authoritative",
+  "publication_scope": "public-testbed-only",
+  "claim_boundary": "PUBLIC_EXPERIMENT != VERIFIED_TRUTH",
+  "method_boundary": "PRIVATE METHOD MAY INFORM SOLVING; PRIVATE SOURCE MUST NOT PROPAGATE",
+  "progression_model": {
+    "currency_meaning": "knowledge-currentness",
+    "states": [
+      "CURRENT_EPOCH",
+      "CURRENT_CANONICAL",
+      "HISTORICAL_PREDECESSOR",
+      "HISTORICAL_SUPERSEDED",
+      "COEXISTING_LINEAGE",
+      "PRESERVED_UNRESOLVED",
+      "PRESERVED"
+    ],
+    "boundaries": [
+      "CURRENT != TRUE",
+      "SUPERSEDED != FALSE",
+      "HISTORICAL != IRRELEVANT",
+      "ALIAS != LINEAGE",
+      "SIMILARITY != DESCENT"
+    ]
+  },
+  "rooms": [
+    {
+      "id": "path-constellation",
+      "name": "Path Constellation",
+      "purpose": "Progression and verified lineage"
+    },
+    {
+      "id": "compass",
+      "name": "Compass",
+      "purpose": "Currentness and navigation"
+    },
+    {
+      "id": "failure-museum",
+      "name": "Failure Museum",
+      "purpose": "Failed, superseded, and zero-result retention"
+    },
+    {
+      "id": "evidence-telescope",
+      "name": "Evidence Telescope",
+      "purpose": "Provenance and claim boundaries"
+    },
+    {
+      "id": "language-garden",
+      "name": "Language Garden",
+      "purpose": "Aliases and terminology without forced identity"
+    },
+    {
+      "id": "wonder-room",
+      "name": "Wonder Room",
+      "purpose": "Preserved unresolved relations and open holes"
+    }
+  ],
+  "experiments": [
+    {
+      "id": "projection-isolation-v0",
+      "title": "Projection Isolation v0",
+      "status": "tested",
+      "currentness": "CURRENT_CANONICAL",
+      "changed_degree": "projection builder input is restricted to public-testbed source files",
+      "invariants": [
+        "full repository is not a projection input",
+        "private-origin carriers are not admitted",
+        "exact source revision is carried in the generated projection manifest",
+        "claim boundaries and remainder stay visible"
+      ],
+      "evidence": "generated projection manifest plus deterministic source checks",
+      "result": "exact-head source isolation (PR #178), gh-pages byte identity, and live network-edge isolation (PR #179 successor) verified",
+      "zero_result": "declared repository-route leakage counterprobes returned zero admitted repository routes",
+      "remainder": [
+        "admit the next experiment only with its own changed degree, evidence boundary, counterprobe, and rollback path",
+        "continue measuring accessibility, performance, and clarity as the test bed grows"
+      ],
+      "provenance": "issue:166;pr:178;pr:179;source:f05fc0550ba0e945ea64e9b8447b972b1c4a11fd;projection:2068472a799e0631ae3e50d6b1c6c55e6b995d9d",
+      "claim_boundary": "LIVE_PROJECTION_VERIFIED != EXPERIMENTAL_CLAIM_VALIDATED"
+    },
+    {
+      "id": "musilanguage-public-app-v1",
+      "title": "Musilanguage unified public application",
+      "status": "active",
+      "currentness": "CURRENT_EPOCH",
+      "changed_degree": "add one curated public application route from play/musilanguage while keeping all other play and repository routes excluded",
+      "invariants": [
+        "only the explicit Musilanguage runtime allowlist is projected",
+        "single/radio/Word Forge predecessor pages remain source history rather than separate public apps",
+        "instrument mixing changes rendering only; source text and MUSIC64 cells remain distinct",
+        "language-to-music mapping is artistic/generative and not semantic truth",
+        "network-edge isolation remains required"
+      ],
+      "evidence": "owner direction dated 2026-09-25 plus generated projection manifest, source checks, and live edge checks",
+      "result": "current source defines one Musilanguage Studio route with 64 style profiles, six instrument buses, reversible variation, MIDI/WAV export, and in-app history",
+      "zero_result": "no authorization is granted to the rest of play/, about/, research/, or repository files",
+      "remainder": [
+        "merge and run exact-head projection verification",
+        "verify the live /play/musilanguage/ edge after gh-pages advances",
+        "continue accessibility and cross-browser audio testing independently"
+      ],
+      "provenance": "owner-direction:2026-09-25;play/musilanguage lineage:ddb5b5c9,f2921bd8,21595039",
+      "claim_boundary": "PUBLIC_MUSILANGUAGE_APP != WHOLE_PLAY_PUBLICATION"
+    }
+  ],
+  "paths": [
+    {
+      "id": "current-public-testbed",
+      "title": "Current public test bed",
+      "status": "active",
+      "currentness": "CURRENT_EPOCH",
+      "progression_position": "issue-166 / visible-state successor",
+      "relation": "CURRENT_CANONICAL",
+      "evidence": "narrow source family and live projection infrastructure are admitted",
+      "result": "current work keeps the testbed isolated while separately projecting curated Musilanguage Studio and NEON//VEIL release routes",
+      "provenance": "issue:166;pr:178;pr:179",
+      "claim_boundary": "CURRENT != TRUE",
+      "remainder": "future routes still require separate explicit admission; NEON world authority remains local/trusted-LAN rather than GitHub-hosted"
+    },
+    {
+      "id": "network-edge-isolation",
+      "title": "Network-edge isolation",
+      "status": "tested",
+      "currentness": "CURRENT_CANONICAL",
+      "progression_position": "issue-166 / degree-2 evidence",
+      "relation": "VERIFIED_LINEAGE",
+      "evidence": "live verifier matched source f05fc0550... to projection 2068472a... and projection identity 4cc3641b...",
+      "result": "projected source files were present and declared repository routes were absent",
+      "zero_result": "0 declared forbidden repository routes were admitted at the tested edge",
+      "provenance": "pr:179;source:f05fc0550ba0e945ea64e9b8447b972b1c4a11fd;projection:2068472a799e0631ae3e50d6b1c6c55e6b995d9d",
+      "claim_boundary": "EDGE_CHECK_PASS != UNIVERSAL_ABSENCE",
+      "remainder": "repeat edge counterprobes after every projection change"
+    },
+    {
+      "id": "synthetic-merge-red",
+      "title": "Synthetic-merge RED evidence",
+      "status": "failed",
+      "currentness": "HISTORICAL_SUPERSEDED",
+      "progression_position": "issue-160 verifier discovery",
+      "relation": "HISTORICAL_PREDECESSOR",
+      "evidence": "PR #171 RED run materialized GitHub synthetic merge instead of contributor head",
+      "result": "RED result was retained but rejected as exact-head evidence; PR #172 repaired verifier provenance",
+      "provenance": "pr:171;pr:172",
+      "claim_boundary": "INVALID_RED != DISCARDED_HISTORY",
+      "remainder": "retain as a Failure Museum example of evidence-carrier mismatch"
+    },
+    {
+      "id": "whole-repository-publication",
+      "title": "Whole-repository Pages publication",
+      "status": "blocked",
+      "currentness": "PRESERVED",
+      "progression_position": "publication scope boundary",
+      "relation": "CLAIM_BOUNDARY",
+      "evidence": "Separate owner authorizations admit only the generated public test bed, the curated Musilanguage Studio route, and the curated NEON//VEIL release route with five named platform packages.",
+      "result": "repository-wide Pages publication and every non-authorized Play/research route remain blocked",
+      "provenance": "issue:166;PUBLIC_TESTBED_APPROVAL.json;PUBLIC_NEON_VEIL_APPROVAL.json;owner-direction:2026-09-29",
+      "claim_boundary": "PUBLIC_TESTBED != WHOLE_REPOSITORY",
+      "remainder": "additional routes still require new explicit owner scope and their own source isolation, privacy, accessibility, and edge verification"
+    },
+    {
+      "id": "next-experiment-admission",
+      "title": "Next experiment admission",
+      "status": "deferred",
+      "currentness": "PRESERVED_UNRESOLVED",
+      "progression_position": "post-isolation frontier",
+      "relation": "PRESERVED_UNRESOLVED",
+      "evidence": "no additional experiment has yet passed a separate one-degree admission cycle",
+      "result": "deferred rather than silently promoted",
+      "provenance": "issue:166",
+      "claim_boundary": "IDEA != ADMITTED_EXPERIMENT",
+      "remainder": "select one real problem, one changed degree, one counterprobe, and one usefulness witness"
+    },
+    {
+      "id": "prior-gh-pages-projection",
+      "title": "Prior gh-pages state",
+      "status": "return",
+      "currentness": "HISTORICAL_PREDECESSOR",
+      "progression_position": "projection rollback lineage",
+      "relation": "RETURN_PATH",
+      "evidence": "projection commit 2068472a... preserved predecessor 3dcb37a5... as its parent",
+      "result": "a concrete way back remains in branch history",
+      "provenance": "gh-pages:3dcb37a5ad6d7d439054a5b743fc7530271ac8c2;projection:2068472a799e0631ae3e50d6b1c6c55e6b995d9d",
+      "claim_boundary": "RETURN_PATH != CURRENT_AUTHORITY",
+      "remainder": "rollback still requires deliberate review before use"
+    },
+    {
+      "id": "musilanguage-public-application",
+      "title": "Musilanguage Studio public route",
+      "status": "active",
+      "currentness": "CURRENT_EPOCH",
+      "progression_position": "2026-09-25 explicit owner publication successor",
+      "relation": "CURRENT_CANONICAL",
+      "evidence": "curated allowlist is encoded in projection builder and approval artifact",
+      "result": "one public linguistic-music generator replaces separate public predecessor music surfaces",
+      "provenance": "PUBLIC_TESTBED_APPROVAL.json;play/musilanguage/index.html;owner-direction:2026-09-25",
+      "claim_boundary": "ONE_PUBLIC_APP != DELETION_OF_HISTORY",
+      "remainder": "live edge verification after merge"
+    }
+  ],
+  "aliases": [
+    {
+      "term": "CURRENCY",
+      "meaning": "knowledge currentness / supersession state",
+      "relation": "ALIAS_ONLY",
+      "claim_boundary": "CURRENCY_HERE != MONETARY_CURRENCY"
+    },
+    {
+      "term": "public test bed",
+      "meaning": "authorized narrow experimental projection",
+      "relation": "ALIAS_ONLY",
+      "claim_boundary": "PUBLIC_TEST_BED != WHOLE_REPOSITORY"
+    }
+  ],
+  "verified_lineage": [
+    {
+      "from": "pr:171",
+      "to": "pr:172",
+      "relation": "VERIFIER_REPAIR",
+      "evidence": "exact-head verifier successor was merged"
+    },
+    {
+      "from": "pr:178",
+      "to": "pr:179",
+      "relation": "VERIFIED_SUCCESSOR",
+      "evidence": "source isolation preceded publication switching"
+    }
+  ],
+  "unresolved_relations": [
+    {
+      "from": "next-experiment-admission",
+      "to": "future-project-canon",
+      "relation": "PRESERVED_UNRESOLVED",
+      "reason": "no experiment result is admitted to project canon merely by appearing in the public test bed"
+    },
+    {
+      "from": "public-working-principles",
+      "to": "future-experiment-method",
+      "relation": "PRESERVED_UNRESOLVED",
+      "reason": "principles guide experimental structure but do not pre-authorize any future experiment or claim"
+    }
+  ],
+  "principles": [
+    {
+      "id": "usday",
+      "name": "USDAY",
+      "meaning": "cooperative work stays visible as progression, evidence, correction, and Remainder",
+      "boundary": "COOPERATION != AUTHORITY"
+    },
+    {
+      "id": "interlingua",
+      "name": "Interlingua",
+      "meaning": "shared operational language connects terms and roles without forcing distinct things into one identity",
+      "boundary": "SHARED_LANGUAGE != FORCED_IDENTITY"
+    },
+    {
+      "id": "pairity",
+      "name": "Pairity",
+      "meaning": "inspect opposing or complementary pairs before claiming parity, equivalence, or collapse",
+      "boundary": "PAIRITY != PARITY"
+    },
+    {
+      "id": "visible-paths",
+      "name": "Visible paths",
+      "meaning": "active, tested, failed, blocked, deferred, and return paths remain inspectable",
+      "boundary": "CURRENT_PATH != ONLY_PATH"
+    },
+    {
+      "id": "wonderment",
+      "name": "Wonderment",
+      "meaning": "unresolved questions remain available for exploration instead of being manufactured into answers",
+      "boundary": "WONDER != CLAIM"
+    },
+    {
+      "id": "one-degree",
+      "name": "One-degree experiment",
+      "meaning": "change one independently controllable degree per discriminating observation when practical",
+      "boundary": "ONE_DEGREE_TEST != UNIVERSAL_PROOF"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+
+const workflow=await readFile(new URL('../.github/workflows/pages-sync.yml',import.meta.url),'utf8');
+const liveWorkflow=await readFile(new URL('../.github/workflows/pages-live-alias.yml',import.meta.url),'utf8');
+const approval=JSON.parse(await readFile(new URL('../PUBLIC_TESTBED_APPROVAL.json',import.meta.url),'utf8'));
+const neonApproval=JSON.parse(await readFile(new URL('../PUBLIC_NEON_VEIL_APPROVAL.json',import.meta.url),'utf8'));
+const playHubApproval=JSON.parse(await readFile(new URL('../PUBLIC_PLAY_HUB_APPROVAL.json',import.meta.url),'utf8'));
+
+assert.equal(approval.schema,'redogit/public-testbed-approval/v1');
+assert.equal(approval.approved,true);
+assert.equal(approval.scope,'public-testbed-plus-musilanguage');
+assert.ok(approval.authorized_routes?.includes('/play/musilanguage/'));
+assert.ok(approval.authorized_source_families?.some(x=>x.startsWith('play/musilanguage/')));
+assert.equal(approval.issue,166);
+assert.equal(approval.commercial_license_granted,false);
+assert.equal(playHubApproval.schema,'redogit/public-play-hub-approval/v1');
+assert.equal(playHubApproval.approved,true);
+assert.equal(playHubApproval.route,'/play/');
+assert.deepEqual(playHubApproval.authorized_child_routes,['/play/neon-veil/','/play/musilanguage/']);
+assert.deepEqual(playHubApproval.authorized_source_families,['play/public-index.html']);
+assert.equal(playHubApproval.public_backend_authorized,false);
+assert.equal(playHubApproval.commercial_license_granted,false);
+assert.equal(neonApproval.schema,'redogit/public-play-route-approval/v1');
+assert.equal(neonApproval.approved,true);
+assert.equal(neonApproval.route,'/play/neon-veil/');
+assert.equal(neonApproval.public_backend_authorized,false);
+assert.equal(neonApproval.commercial_license_granted,false);
+assert.match(neonApproval.source_checkpoint_sha256,/^[0-9a-f]{64}$/);
+for(const key of ['source_isolation_required','privacy_boundary_required','accessibility_required','network_edge_verification_required','package_hash_verification_required'])assert.equal(neonApproval.review?.[key],true,'missing NEON approval review gate: '+key);
+for(const key of [
+  'source_isolation_required',
+  'privacy_boundary_required',
+  'experimental_label_required',
+  'accessibility_required',
+  'network_edge_verification_required'
+])assert.equal(approval.review?.[key],true,'missing testbed approval review gate: '+key);
+
+assert.ok(workflow.includes('permissions:\n  contents: write'),'testbed sync needs branch write authority');
+assert.ok(!workflow.includes('pages: write')&&!workflow.includes('actions: write'),'testbed sync must not gain deployment/dispatch authority');
+assert.ok(workflow.includes("'public-testbed/**'"),'testbed sources must trigger projection sync');
+assert.ok(workflow.includes("'play/public-index.html'"),'central Play hub source must trigger projection sync');
+assert.ok(workflow.includes("'PUBLIC_PLAY_HUB_APPROVAL.json'"),'central Play hub authorization must trigger projection sync');
+assert.ok(workflow.includes("'play/musilanguage/**'"),'Musilanguage sources must trigger projection sync');
+assert.ok(workflow.includes("'play/neon-veil/**'"),'NEON sources must trigger projection sync');
+assert.ok(workflow.includes("'PUBLIC_NEON_VEIL_APPROVAL.json'"),'NEON route authorization changes must trigger projection sync');
+assert.ok(workflow.includes("'tools/check-neon-veil-release.py'"),'NEON release verifier changes must trigger projection sync');
+assert.ok(workflow.includes("'PUBLIC_TESTBED_APPROVAL.json'"),'scope authorization changes must trigger projection sync');
+assert.ok(workflow.includes('node tools/check-public-testbed.mjs --revision "$GITHUB_SHA"'),'source sync must verify isolated projection at exact source SHA');
+assert.ok(workflow.includes('node tools/build-public-testbed.mjs --root . --out "$OUT" --revision "$GITHUB_SHA"'),'source sync must build only the testbed projection');
+assert.ok(workflow.includes('test ! -e "$OUT/README.md"'),'source sync must counterprobe repository-root leakage');
+assert.ok(workflow.includes('git fetch --depth=1 origin gh-pages'),'source sync must observe prior projection for rollback lineage');
+assert.ok(workflow.includes('lease_sha="$(git rev-parse HEAD)"'),'source sync must bind the predecessor branch revision');
+assert.ok(workflow.includes('git rm -r -f .'),'source sync must clear the previous projection tree before copy');
+assert.ok(workflow.includes('cp -a "$PROJECTION_DIR"/. .'),'source sync must copy the generated projection, not repository files');
+assert.ok(workflow.includes('git commit -m "Publish curated public routes from ${GITHUB_SHA}"'),'source sync must create a distinct curated projection commit');
+assert.ok(workflow.includes('git push --force-with-lease=refs/heads/gh-pages:"$lease_sha" origin HEAD:refs/heads/gh-pages'),'publication must preserve lease safety while advancing only projection HEAD');
+assert.ok(!workflow.includes('$GITHUB_SHA:refs/heads/gh-pages'),'source main commit must never be pushed directly to gh-pages');
+assert.ok(!workflow.includes('PUBLIC_RELEASE_APPROVAL.json'),'testbed publication must not depend on the obsolete self-referential exact-SHA approval artifact');
+
+for(const forbidden of [
+  "'research/projects/**'",
+  "'play/**'",
+  "'coordinate-space/**'",
+  "'analytics/**'",
+  "'data-*.txt'"
+])assert.ok(!workflow.includes(forbidden),'repository-wide publication trigger survived: '+forbidden);
+
+assert.ok(liveWorkflow.includes("'play/public-index.html'"),'live PR verifier must watch central Play hub source');
+assert.ok(liveWorkflow.includes("'PUBLIC_PLAY_HUB_APPROVAL.json'"),'live PR verifier must watch central Play hub approval');
+assert.ok(liveWorkflow.includes('workflows: ["Sync Conscience64 public test bed"]'),'live verifier must follow the narrow source-sync workflow');
+assert.ok(liveWorkflow.includes('types: [completed]'),'live verifier must follow completed sync runs');
+assert.ok(liveWorkflow.includes('branches: [main]'),'live verifier must bind main source');
+assert.ok(liveWorkflow.includes('permissions: {}'),'live verifier must retain zero configured repository permissions');
+assert.ok(liveWorkflow.includes('EXPECTED_SOURCE_SHA:'),'live verifier must bind the exact main source revision');
+assert.ok(liveWorkflow.includes('node tools/check-public-testbed.mjs --revision "$EXPECTED_SOURCE_SHA"'),'live verifier must reconstruct source projection');
+assert.ok(liveWorkflow.includes('git ls-tree -r --name-only refs/remotes/origin/gh-pages'),'live verifier must inventory actual projection branch bytes');
+assert.ok(liveWorkflow.includes('cmp "$EXPECTED/$rel" "$RUNNER_TEMP/published-file"'),'live verifier must compare exact expected and published bytes');
+assert.ok(liveWorkflow.includes('node tools/check-public-testbed-edge.mjs'),'live verifier must inspect the network edge');
+assert.ok(!liveWorkflow.includes('PUBLICATION_STATUS.json'),'pause-only surface must no longer be live authority');
+assert.ok(!liveWorkflow.includes('PUBLIC_RELEASE_APPROVAL.json'),'live verifier must use testbed scope + exact manifest provenance, not self-referential approval');
+
+const builder=await readFile(new URL('./build-public-testbed.mjs',import.meta.url),'utf8');
+const edge=await readFile(new URL('./check-public-testbed-edge.mjs',import.meta.url),'utf8');
+assert.ok(builder.includes("source_root:'public-testbed/ + curated play hub + curated play/musilanguage/ + curated play/neon-veil/'"));
+assert.ok(builder.includes("publication_scope:'public-testbed-plus-curated-play'"));
+assert.ok(edge.includes("'README.md'")&&edge.includes("'research/projects/README.md'")&&edge.includes("'play/README.md'")&&edge.includes("'play/mmo/index.html'"),'network edge must counterprobe repository-route leakage');
+assert.ok(edge.includes("get('play/')"),'network edge must positively verify central Play hub');
+assert.ok(edge.includes("get('play/musilanguage/')"),'network edge must positively verify Musilanguage');
+assert.ok(edge.includes("get('play/neon-veil/')"),'network edge must positively verify NEON//VEIL');
+assert.ok(edge.includes("play/neon-veil/downloads/"),'network edge must verify NEON package bytes');
+assert.ok(edge.includes("'play/musilanguage/radio.html'")&&edge.includes("'play/musilanguage/single.html'"),'network edge must reject predecessor public music routes');
+
+console.log('PASS Pages contract: isolated public testbed + curated Musilanguage + curated NEON//VEIL -> rollback-linked projection commit -> exact byte comparison -> positive routes/package hashes + leakage counterprobes');

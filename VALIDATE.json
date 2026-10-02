@@ -1,0 +1,107 @@
+{
+  "schema": "standalone-export-validation/v1",
+  "checks": [
+    {
+      "name": "site-runtime",
+      "cwd": "conscience64",
+      "command": [
+        "node",
+        "tools/check_site.mjs"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "research-selfcheck",
+      "cwd": "conscience64",
+      "command": [
+        "python",
+        "tools/redogit_selfcheck.py"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "cooperative-field",
+      "cwd": "conscience64",
+      "command": [
+        "node",
+        "tools/check_cooperative_field.mjs"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "platform-modules",
+      "cwd": "conscience64",
+      "command": [
+        "node",
+        "--test",
+        "analytics/test.mjs",
+        "coordinate-space/test_codec.mjs",
+        "coordinate-space/test_culture.mjs",
+        "coordinate-space/test_source_file.mjs",
+        "image-society/image-society.test.mjs",
+        "image-society/scale.test.mjs",
+        "image-society/scheduler.test.mjs",
+        "image-society/schema-runtime.test.mjs",
+        "navigation/context-horizon/current-chat-artifacts.test.mjs",
+        "navigation/context-horizon/engine.test.mjs",
+        "navigation/context-horizon/library-work-expansion.test.mjs",
+        "navigation/context-horizon/named-architecture-expansion.test.mjs",
+        "navigation/context-horizon/questions.test.mjs",
+        "navigation/context-horizon/repair-successors.test.mjs",
+        "navigation/context-horizon/route-registry.test.mjs",
+        "navigation/context-horizon/work-inventory.test.mjs"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "analytics-python",
+      "cwd": "conscience64/analytics",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-p",
+        "test_*.py"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "coordinate-python",
+      "cwd": "conscience64/coordinate-space",
+      "command": [
+        "python",
+        "test_public.py"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    },
+    {
+      "name": "available-tooling",
+      "cwd": "conscience64",
+      "command": [
+        "node",
+        "--test",
+        "tools/export-public-routes.test.mjs",
+        "tools/hypothesis-algorithm-builder.test.mjs",
+        "tools/private-origin-boundary.test.mjs",
+        "tools/semantic-applicability.test.mjs",
+        "tools/test-image-gen.mjs"
+      ],
+      "environment": {},
+      "timeout_seconds": 300
+    }
+  ],
+  "not_exercised": [
+    "Chrome/Chromium browser checks (browser absent in preparation environment).",
+    "Windows SDK, Android and full LLVM/MLIR native builds.",
+    "Excluded projection verifier and privacy/lineage documents/tests remain withheld."
+  ]
+}
