@@ -8,6 +8,8 @@ This standalone export preserves original source paths and bytes. Necessary cros
 
 ## Start here
 
+- [Event Horizon interface and full search backend](server/README.md)
+- [Live search interface](https://redogit.github.io/conscience64-platform/)
 - [Platform browser entry](<conscience64/index.html>)
 - [Platform API](<conscience64/API.md>)
 
