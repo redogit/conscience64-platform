@@ -1,5 +1,7 @@
 # Conscience64
 
+> **Public page:** https://redogit.github.io/conscience64-platform/ · **Main / About:** https://redogit.github.io/redogit/
+
 Platform, recovery, navigation, analytics, and local model tooling.
 
 This standalone export preserves original source paths and bytes. Necessary cross-project dependencies are copied with explicit provenance; ownership and historical evidence remain with their source projects.
