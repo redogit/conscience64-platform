@@ -1,0 +1,5 @@
+export const terms=s=>String(s).normalize('NFKC').toLocaleLowerCase().match(/[\p{L}\p{N}_]+/gu)||[];
+export function retrieve(items,query,{goal='',must='',prefer='',avoid='',scope='all'}={}){
+ const split=s=>s.split(',').map(x=>x.trim().toLocaleLowerCase()).filter(Boolean),required=split(must),excluded=split(avoid),preferred=split(prefer),q=terms(query),g=terms(goal);
+ return items.filter(d=>scope==='all'||d.kind===scope).flatMap(d=>{const title=d.title.toLocaleLowerCase(),hay=[d.title,d.text,d.source].join(' ').toLocaleLowerCase(),words=new Set(terms(hay));if(required.some(x=>!hay.includes(x))||excluded.some(x=>hay.includes(x)))return[];const matches=q.filter(x=>words.has(x)),goalMatches=g.filter(x=>words.has(x));if(q.length&&!matches.length)return[];const score=matches.reduce((s,x)=>s+(title.includes(x)?8:2),0)+goalMatches.length*2+preferred.filter(x=>hay.includes(x)).length*3;return[{...d,score,reason:matches.length?'Matched '+matches.join(', '):'Browsing your library',goalMatches,required}]}).sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title));
+}
