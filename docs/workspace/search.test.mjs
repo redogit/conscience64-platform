@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {retrieve} from './search.mjs';
+import {parseDocument,documentFor} from './orbit-core.mjs';
+const items=[{id:'a',title:'Budget phone',text:'Android under 500',source:'',kind:'note'},{id:'b',title:'Phone premium',text:'Android 1000',source:'',kind:'web'},{id:'c',title:'日本語',text:'検索',source:'',kind:'note'}];
+assert.deepEqual(retrieve(items,'phone',{must:'Android',avoid:'premium'}).map(x=>x.id),['a']);
+assert.equal(retrieve(items,'検索')[0].id,'c');
+assert.equal(retrieve(items,'missing').length,0);
+assert.equal(retrieve(items,'phone',{scope:'web'})[0].id,'b');
+assert.equal(retrieve(items,'phone',{prefer:'premium'})[0].id,'b');
+assert.throws(()=>parseDocument(JSON.stringify({schema:'bad'}),'orbit'));
+const data={items:[{id:'a',title:'A',text:'hello',source:'https://example.com',language:''}]};assert.deepEqual(parseDocument(JSON.stringify(documentFor('orbit',data)),'orbit'),{items:[{...data.items[0],source:'https://example.com/'}]});
+assert.throws(()=>documentFor('orbit',{items:[{...data.items[0],source:'javascript:alert(1)'}]}));
+console.log('PASS search constraints, Unicode, scope, ranking and Orbit format boundaries');

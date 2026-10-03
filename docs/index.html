@@ -1,28 +1,9 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Conscience64 Platform — redogit project page under construction.">
-<title>Conscience64 Platform · under construction</title>
-<style>
-:root{color-scheme:dark;--bg:#0b0d10;--panel:#12161b;--text:#edf2f7;--muted:#9aa8b6;--line:#27313b;--accent:#ffad5c;--link:#8ed8ff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-main{max-width:760px;margin:auto;padding:64px 22px}h1{font-size:clamp(2.4rem,8vw,5rem);line-height:1;letter-spacing:-.05em}
-.notice{border:1px solid var(--line);border-left:5px solid var(--accent);background:var(--panel);padding:18px 20px;border-radius:10px;margin:26px 0}
-a{color:var(--link)}.muted{color:var(--muted)}nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px}
-</style></head><body><main>
-<p class="muted">October 2, 2026 · REDOGIT</p>
-<h1>Conscience64 Platform</h1>
-<div class="notice"><strong>🚧 Under construction.</strong><p>This is the small public entry point for this project while its larger surface is being reorganized.</p></div>
-<p>Platform, recovery, navigation, analytics, and local-model tooling.</p>
-<section aria-labelledby="current-sources"><h2 id="current-sources">Current source materials</h2><ul>
-<li><a href="https://github.com/redogit/conscience64-platform/blob/main/README.md">Standalone export README</a> — platform export provenance and validation boundary.</li>
-<li><a href="https://github.com/redogit/conscience64">Canonical Conscience64 repository</a>.</li>
-<li><a href="https://github.com/redogit/conscience64-platform/blob/main/conscience64/API.md">Exported platform API contract</a>.</li>
-<li><a href="https://redogit.github.io/conscience64/">Curated Conscience64 public projection</a>.</li>
-</ul><p class="muted">This standalone repository is an export surface; project-local authority and detailed history remain in Conscience64.</p></section>
-<p class="muted">This page is intentionally small. Project history, evidence, failures, and detailed records remain in the repository rather than being duplicated into a public update stream.</p>
-<nav>
-<a href="https://redogit.github.io/redogit/">← Main / About</a>
-<a href="https://github.com/redogit/conscience64-platform">Source repository →</a>
-</nav>
-</main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="description" content="A quiet workspace for finding, keeping and connecting your work."><title>Conscience64 · Your workspace</title><link rel="stylesheet" href="workspace/style.css"></head>
+<body><canvas id="scene" aria-hidden="true"></canvas><a class="skip" href="#question">Skip to your question</a>
+<header><a class="brand" href="https://redogit.github.io/redogit/">Conscience<span>64</span></a><span id="runtime">Starting the workspace…</span></header>
+<nav aria-label="Workspace"><button class="edge recent" data-drawer="recent" aria-expanded="false" aria-controls="drawer">Recent <span>↶</span></button><button class="edge add" data-drawer="add" aria-expanded="false" aria-controls="drawer">Add <span>＋</span></button><button class="edge refine" data-drawer="refine" aria-expanded="false" aria-controls="drawer">Refine <span>≋</span></button><button class="edge tools" data-drawer="tools" aria-expanded="false" aria-controls="drawer">Tools <span>⋯</span></button></nav>
+<main id="main"><section id="welcome"><p class="eyebrow">A little space to think.</p><h1>What would you like<br>help finding?</h1><p class="intro">Your notes. A useful source. Where you left off.</p><div class="examples"><button data-query="What have I saved?">Explore my library</button><button data-drawer="add">Keep a thought</button></div></section><section id="results" hidden aria-label="Search results"><div class="results-head"><h1 id="result-title"></h1><button id="clear" aria-label="Return to start">✕</button></div><p id="summary" role="status"></p><div id="cards"></div><div id="pagination"><button id="prev">Previous</button><span id="page"></span><button id="next">Next</button></div></section></main>
+<aside id="drawer" hidden aria-labelledby="drawer-title"><div class="drawer-head"><h2 id="drawer-title"></h2><button id="close" aria-label="Close menu">✕</button></div><div id="drawer-body"></div></aside>
+<div class="composer"><p id="context" aria-live="polite">Search your library, or add something to begin.</p><form id="ask"><label class="sr" for="question">What would you like help finding?</label><input id="question" type="search" placeholder="Ask, or search your work…" autocomplete="off" maxlength="2000"><button id="voice" type="button" aria-label="Dictate your question">◉</button><button id="submit" aria-label="Search" disabled>↑</button></form><div class="composer-foot"><button id="alignment" data-drawer="refine">All sources · no extra constraints</button><span id="notice" role="status" aria-live="polite"></span></div></div>
+<noscript><p class="nojs">Enable JavaScript to search your local library. <a href="previous.html">Project information</a> remains available.</p></noscript><script type="module" src="workspace/bootstrap.mjs"></script></body></html>
