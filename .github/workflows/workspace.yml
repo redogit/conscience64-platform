@@ -14,12 +14,23 @@ jobs:
         with:
           node-version: '22'
       - run: node docs/workspace/search.test.mjs
+      - run: node docs/workspace/context.test.mjs
+      - run: node docs/workspace/horizon-scene.test.mjs
+      - run: node docs/workspace/renderer-lifecycle.test.mjs
+      - run: node docs/workspace/search-service.test.mjs
+      - run: node docs/workspace/routes.test.mjs
+      - run: node docs/workspace/memory.test.mjs
+      - run: python -m unittest discover -s server -p 'test_*.py' -v
       - run: python validate.py --integrity-only
       - run: npm install --no-save --package-lock=false playwright@1.58.2
       - run: npx playwright install --with-deps chromium
       - run: |
           python -m http.server 8765 --bind 127.0.0.1 --directory docs > /tmp/workspace-server.log 2>&1 &
           node tests/workspace-browser.cjs
+          node tests/horizon-browser.cjs
+      - run: |
+          python server/search_server.py --port 8768 > /tmp/workspace-backend.log 2>&1 &
+          WORKSPACE_URL=http://127.0.0.1:8768 node tests/workspace-backend-browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

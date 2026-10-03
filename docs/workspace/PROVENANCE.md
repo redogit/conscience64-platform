@@ -1,9 +1,15 @@
-# Everyday workspace
+# Event Horizon workspace
 
 New Platform implementation, October 3, 2026. Does not alter exported historical source files.
 
 `orbit-core.mjs` derives from `conscience64/play/assets/core.mjs` at platform source revision 3433a2719d6261a0f470f9551a2de61610f0d92e (upstream Conscience64 Play tools, MIT). The two implicit voice/music imports were removed so initialization is controlled by the renderer-first bootstrap. The validation and Orbit import/export format are retained. Original source ownership and evidence remain upstream. Local storage key is compatible with Orbit Shelf on the same origin; different GitHub Pages repository paths share the github.io origin.
 
-The first usable release includes local Orbit notes, merged import with conflict rejection, export, undo, goal-aware lexical retrieval, recent queries, optional explicit Wikipedia search and browser dictation. S′ model inference and the remaining advanced tools are not implemented in this release. Tools clearly states model unavailability. No research corpus is republished here. `previous.html` preserves the former public entry.
+The interface includes local Orbit notes, merged import with conflict rejection, export, undo, goal-aware BM25 retrieval, remembered source preferences and aliases, recent queries and browser dictation. Whole-query context proposals run after typing pauses; only accepted proposals refine explicit provider requests. Private notes and local learned answers cannot supply record-derived web-context proposals. Restricted private-origin markers are excluded recursively from search carriers.
 
-Run `node docs/workspace/search.test.mjs` and `python validate.py --integrity-only`. Browser verification is a separate check.
+`public-corpus.json` contains only the existing public browser projection from verified `conscience64/data-00.txt` through `data-05.txt`, its original transport manifest, and the separate public `research/projects/projects.json` registry. All 734 source UOIDs remain unchanged; the projected byte hash is distinct from original archive identity. It includes seven projects and fourteen lessons. `public-routes.json` preserves the existing catalogue, policy, 65 routes and 248 country profiles, with source file hashes. `server/build_public_search.py` regenerates both carriers; no private memory, withheld paths or archives are included.
+
+The service preserves the Conscience64API simple/advanced search, relations, traversal, microdata, I/R/P/O and project/lesson contracts. External search integrates Wikipedia, OpenAlex, Crossref, Internet Archive and GitHub. The route adapter also preserves the separate original global-search planner; the local backend supplies its Crossref/Europe PMC retrieval. Public Pages is static and depends on browser-accessible APIs for direct retrieval; use the local interface for server retrieval. Provider fixtures test behavior rather than current network availability.
+
+The horizon is an artistic visual metaphor. WebGPU, WebGL2 and Canvas2D renderers use one bounded animation loop. S′ model inference is not connected; Tools states this explicitly. `previous.html` preserves the former public entry. Historical source bytes and ownership remain intact.
+
+Run `node --test docs/workspace/*.test.mjs`, `python -m unittest discover -s server -p 'test_*.py'` and `python validate.py --integrity-only`. Real browser verification and preview artifacts run in the workspace GitHub Actions workflow.
