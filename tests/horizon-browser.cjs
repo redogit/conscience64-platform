@@ -169,6 +169,18 @@ async function typingAndContext(browser) {
   assert.equal(network.calls.length, beforeRemovalSearch + 5);
   assert.ok(network.calls.slice(beforeRemovalSearch).every(call => !extraTokens.some(token => call.query.toLowerCase().includes(token))), 'removed context is absent from later provider requests');
 
+  const beforeScopeRefine = network.calls.length;
+  await page.locator('[data-drawer="refine"]').first().click();
+  assert.equal(await page.locator('#drawer-body select[name="scope"]').inputValue(), 'web', 'Sources targets the currently displayed web candidates');
+  await page.getByLabel('Avoid (comma separated)', { exact: true }).fill('Wikipedia');
+  await page.getByRole('button', { name: 'Apply', exact: true }).click();
+  assert.equal(await page.locator('#cards .card').count(), 4, 'refining web results does not switch into the local index');
+  await page.locator('[data-drawer="refine"]').first().click();
+  await page.getByLabel('Avoid (comma separated)', { exact: true }).fill('');
+  await page.getByRole('button', { name: 'Apply', exact: true }).click();
+  assert.equal(await page.locator('#cards .card').count(), 5, 'removing a web filter restores original fetched candidates');
+  assert.equal(network.calls.length, beforeScopeRefine, 'Sources refinements make no additional provider requests');
+
   // Slow provider responses must not leave the explicit search control stuck after cancellation.
   await page.locator('#question').fill(query + ' with suspension');
   await analyzed(page, 'bike');

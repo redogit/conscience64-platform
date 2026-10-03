@@ -116,7 +116,7 @@ export async function mount(renderer){
    if(analysis?.suggestions?.length){const options=node('details');options.append(node('summary','Additional context directions'));const choices=node('div');choices.className='row';for(const suggestion of analysis.suggestions){if(accepted.some(x=>x.id===suggestion.id))continue;choices.append(action(suggestion.label,()=>{accepted.push({...suggestion});persist();contextualize();open('refine',trigger)}))}options.append(choices);host.append(options);}
    const form=node('form');form.style.display='grid';form.style.gap='14px';
    for(const [k,title] of [['goal','What are you trying to accomplish?'],['must','Must contain (comma separated)'],['prefer','Prefer (comma separated)'],['avoid','Avoid (comma separated)']]){const [l,i]=label(title,'input',goal[k]);i.name=k;form.append(l)}
-   const [l,sel]=label('Local search scope','select');for(const [v,t] of [['all','All local sources'],['note','My Orbit library'],['record','Indexed records'],['project','Project records'],['learned','Learned locally'],['web','Returned web results']]){const o=node('option',t);o.value=v;sel.append(o)}sel.value=goal.scope;sel.name='scope';form.append(l);
+   const [l,sel]=label('Search scope','select');for(const [v,t] of [['all','All local sources'],['note','My Orbit library'],['record','Indexed records'],['project','Project records'],['learned','Learned locally'],['web','Returned web results']]){const o=node('option',t);o.value=v;sel.append(o)}sel.value=viewMode==='web'?'web':goal.scope;sel.name='scope';form.append(l);
    form.append(sectionTitle('External sources · requested only on Search the web'));
    const checks=node('div');checks.className='provider-list';
    for(const id of ['wikipedia','openalex','crossref','archive','github']){const names={wikipedia:'Wikipedia',openalex:'OpenAlex',crossref:'Crossref',archive:'Internet Archive',github:'GitHub'};const l=node('label'),i=node('input');i.type='checkbox';i.name='provider';i.value=id;i.checked=providers.includes(id);l.append(i,node('span',names[id]));checks.append(l)}form.append(checks);
@@ -192,6 +192,7 @@ export async function mount(renderer){
  }
  function search(record=true){
   clearTimeout(queryTimer);request++;abort?.abort();offset=0;selected=null;viewMode='local';
+  if(goal.scope==='web')goal.scope='all';
   try{const out=service.localSearch($('question').value,localOptions());result=out.results;total=out.total;if(record&&$('question').value.trim())history=[{query:$('question').value,goal:{...goal},advanced:{...advanced},accepted:[...accepted]},...history.filter(x=>x.query!==$('question').value)].slice(0,30);persist();contextualize();renderCards()}catch(e){notice('Search could not run: '+e.message)}
  }
  function filterWeb(){
@@ -212,7 +213,7 @@ export async function mount(renderer){
   if(e.key==='Escape'){if(active)close();else{stopSearch();notice('Search stopped.')}}
   if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();if(active)close();$('question').focus()}
  });
- $('ask').onsubmit=e=>{e.preventDefault();contextualize();goal.scope==='web'?filterWeb():search()};$('external-search').onclick=webSearch;
+ $('ask').onsubmit=e=>{e.preventDefault();contextualize();search()};$('external-search').onclick=webSearch;
  $('prev').onclick=()=>{offset=Math.max(0,offset-PAGE);viewMode==='web'?filterWeb():pageLocal()};$('next').onclick=()=>{offset+=PAGE;viewMode==='web'?filterWeb():pageLocal()};
  function pageLocal(){const out=service.localSearch($('question').value,localOptions());result=out.results;total=out.total;renderCards()}
  $('clear').onclick=()=>{abort?.abort();abort=null;request++;clearTimeout(queryTimer);$('question').value='';web=[];accepted=[];result=[];selected=null;document.body.dataset.view='welcome';$('welcome').hidden=false;$('results').hidden=true;renderer.update([],null);syncWordChain();contextualize();persist();window.scrollTo({top:0});$('question').focus({preventScroll:true})};
