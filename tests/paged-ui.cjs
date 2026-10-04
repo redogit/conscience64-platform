@@ -1,12 +1,13 @@
 // Tests follow the same Previous/Next controls available to users.
+async function menuReady(page){await page.waitForFunction(()=>document.querySelector('#drawer-body').getAttribute('aria-busy')!=='true')}
 async function reveal(page,locator){
  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  if(await locator.isVisible().catch(()=>false))return;
  const menu=await page.locator('#drawer').isVisible();
  const back=page.locator(menu?'#drawer-prev':'#prev'),next=page.locator(menu?'#drawer-next':'#next');
  if(!menu&&!await page.locator('#results').isVisible())return;
- for(let i=0;i<100&&await back.isEnabled();i++)await back.click();
- for(let i=0;i<100;i++){if(await locator.isVisible().catch(()=>false))return;if(!await next.isEnabled())break;await next.click()}
+ for(let i=0;i<100;i++){await menuReady(page);if(!await back.isEnabled())break;await back.click()}
+ for(let i=0;i<100;i++){await menuReady(page);if(await locator.isVisible().catch(()=>false))return;if(!await next.isEnabled())break;await next.click()}
 }
 function adaptPage(page){
  const wrap=locator=>new Proxy(locator,{get(target,key){
@@ -22,14 +23,14 @@ function adaptPage(page){
 module.exports={adaptPage,reveal};
 
 async function readAllMenu(page){
- const back=page.locator('#drawer-prev'),next=page.locator('#drawer-next');for(let i=0;i<100&&await back.isEnabled();i++)await back.click();
+ const back=page.locator('#drawer-prev'),next=page.locator('#drawer-next');for(let i=0;i<100;i++){await menuReady(page);if(!await back.isEnabled())break;await back.click()}
  let text='';for(let i=0;i<100;i++){
-  text+=await page.locator('#drawer-body').innerText();
+  await menuReady(page);text+=await page.locator('#drawer-body').innerText();
   for(const reader of await page.locator('#drawer-body .text-pager:visible').all()){
    const forward=reader.getByRole('button',{name:'Text next',exact:true});
    text+=await reader.locator('pre').textContent();for(let j=0;j<1000&&await forward.isEnabled();j++){await forward.click();text+=await reader.locator('pre').textContent()}
   }
-  if(!await next.isEnabled())break;await next.click();
+  await menuReady(page);if(!await next.isEnabled())break;await next.click();
  }
  return text;
 }

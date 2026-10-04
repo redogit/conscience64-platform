@@ -16,7 +16,8 @@ async function geometry(page){
  for(const c of out.controls){if(c.clip)assert.ok(c.y>=c.clip.y-1&&c.bottom<=c.clip.bottom+1,'control clipped by its panel: '+JSON.stringify(c));assert.ok(c.x>=-1&&c.y>=-1&&c.right<=out.width+1&&c.bottom<=out.height+1,'control outside viewport: '+JSON.stringify(c));}
  assert.equal(out.drawerOverflow,false,'menu must paginate instead of scroll');
 }
-async function menuFind(page,locator){for(let i=0;i<100;i++){if(await locator.isVisible())return locator;const next=page.locator('#drawer-next');if(!await next.isEnabled())break;await next.click();}throw Error('Menu item inaccessible: '+locator);}
+async function menuReady(page){await page.waitForFunction(()=>document.querySelector('#drawer-body').getAttribute('aria-busy')!=='true')};
+async function menuFind(page,locator){for(let i=0;i<100;i++){await menuReady(page);if(await locator.isVisible())return locator;const next=page.locator('#drawer-next');if(!await next.isEnabled())break;await next.click();}throw Error('Menu item inaccessible: '+locator);}
 (async()=>{
  const browser=await chromium.launch(launch),page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
  const errors=[],external=[];page.on('pageerror',e=>errors.push(e.message));
@@ -24,6 +25,20 @@ async function menuFind(page,locator){for(let i=0;i<100;i++){if(await locator.is
  await page.addInitScript(()=>localStorage.setItem('conscience64.play.v1.orbit',JSON.stringify({schema:'conscience64.play/v1',app:'orbit',data:{items:Array.from({length:13},(_,i)=>({id:'viewport-'+i,title:'Commuting bike '+i,text:'Electric bike commuting battery range under $2000. '+('Long source text '.repeat(200)),source:'',language:'en'}))}})));
  try{
   await page.goto(baseURL);await page.waitForFunction(()=>window.Conscience64Search&&document.querySelector('#submit')?.disabled===false);
+  const pendingPager=await page.evaluate(async()=>{
+   const {createMenuPager}=await import('./workspace/viewport.mjs');
+   const host=document.createElement('div'),previous=document.createElement('button'),next=document.createElement('button'),status=document.createElement('span');
+   host.style.cssText='position:fixed;left:0;top:0;width:300px;height:70px;overflow:hidden';document.body.append(host);
+   const control=()=>{const b=document.createElement('button');b.style.height='45px';b.textContent='Item';return b};
+   host.append(control(),control());const pager=createMenuPager(host,{previous,next,status});pager.reset();
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+   const before=next.disabled;host.replaceChildren(control());pager.reset();
+   const pending=next.disabled;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+   const after=next.disabled;host.remove();return{before,pending,after};
+  });
+  assert.equal(pendingPager.before,false,'two pages enable Next');
+  assert.equal(pendingPager.pending,true,'a rebuilt menu must not expose stale paging controls');
+  assert.equal(pendingPager.after,true,'single-page menus disable Next');
   await geometry(page); // Catches the old composer below the viewport.
   await page.locator('#question').fill('bi cam');
   await page.locator('#question').press('Home');await page.locator('#question').press('ArrowRight');await page.locator('#question').press('ArrowRight');
@@ -69,7 +84,7 @@ async function menuFind(page,locator){for(let i=0;i<100;i++){if(await locator.is
    await page.locator('.card').first().waitFor();await geometry(page);
    const seen=new Set();for(let i=0;i<100;i++){for(const id of await page.locator('.card').evaluateAll(es=>es.map(e=>e.dataset.resultId)))seen.add(id);if(!await page.locator('#next').isEnabled())break;await page.locator('#next').click();}
    assert.ok([...seen].filter(id=>id.startsWith('viewport-')).length===13,'all results remain reachable');
-   for(const drawer of ['recent','add','refine','tools']){await page.locator('[data-drawer="'+drawer+'"]').first().click();await page.waitForTimeout(80);await geometry(page);for(let i=0;i<100&&await page.locator('#drawer-next').isEnabled();i++){await page.locator('#drawer-next').click();await geometry(page)}await page.locator('#close').click()}
+   for(const drawer of ['recent','add','refine','tools']){await page.locator('[data-drawer="'+drawer+'"]').first().click();await menuReady(page);await geometry(page);for(let i=0;i<100;i++){await menuReady(page);if(!await page.locator('#drawer-next').isEnabled())break;await page.locator('#drawer-next').click();await geometry(page)}await page.locator('#close').click()}
    await page.screenshot({path:`adaptive-${size.width}x${size.height}-preview.png`});
   }
   await page.setViewportSize({width:390,height:844});await page.locator('#reset').click();await page.locator('#question').fill('An electric bike for commuting ');await page.waitForTimeout(700);
@@ -77,7 +92,7 @@ async function menuFind(page,locator){for(let i=0;i<100;i++){if(await locator.is
   await page.setViewportSize({width:390,height:320});
   await page.locator('#reset').click();await page.locator('#question').fill('longword '.repeat(220).trim());await page.locator('#ask').evaluate(f=>f.requestSubmit());
   await page.locator('[data-drawer="recent"]').click();await page.waitForTimeout(80);await geometry(page);
-  while(await page.locator('#drawer-next').isEnabled()){await page.locator('#drawer-next').click();await geometry(page)}
+  for(let i=0;i<100;i++){await menuReady(page);if(!await page.locator('#drawer-next').isEnabled())break;await page.locator('#drawer-next').click();await geometry(page)}
   await page.locator('#close').click();
   await page.setViewportSize({width:390,height:844});await page.locator('#reset').click();
   await page.locator('#question').fill('Commuting bike 0');await page.locator('#ask').evaluate(f=>f.requestSubmit());

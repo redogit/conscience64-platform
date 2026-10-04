@@ -41,7 +41,7 @@ export function createMenuPager(host,{previous,next,status}){
   previous.disabled=index===0;next.disabled=index+1>=pages.length;status.textContent=pages.length?`${index+1} / ${pages.length}`:'1 / 1';
  }
  function layout(){
-  frame=0;if(host.closest('[hidden]'))return;
+  frame=0;if(host.closest('[hidden]')){host.setAttribute('aria-busy','false');return;}
   observer.disconnect();
   for(const e of units)e.hidden=false;for(const e of wrappers)e.hidden=false;
   units=[];wrappers.length=0;collect(host);
@@ -51,10 +51,10 @@ export function createMenuPager(host,{previous,next,status}){
   index=Math.min(index,Math.max(0,pages.length-1));show();
   // Nested wrappers may contribute a gap: split an overflowing page without clipping controls.
   for(let p=0;p<pages.length;p++){index=p;show();while(host.scrollHeight>height+1&&pages[p].length>1){const last=pages[p].pop();if(!pages[p+1])pages[p+1]=[];pages[p+1].unshift(last);show()}}
-  index=Math.min(savedIndex,Math.max(0,pages.length-1));show();observe();
+  index=Math.min(savedIndex,Math.max(0,pages.length-1));show();observe();host.setAttribute('aria-busy','false');
  }
  let savedIndex=0;
- function schedule(){savedIndex=index;if(!frame)frame=requestAnimationFrame(layout)}
+ function schedule(){savedIndex=index;host.setAttribute('aria-busy','true');previous.disabled=next.disabled=true;if(!frame)frame=requestAnimationFrame(layout)}
  previous.onclick=()=>{index=Math.max(0,index-1);show()};next.onclick=()=>{index=Math.min(pages.length-1,index+1);show()};
  host.addEventListener('invalid',e=>{const page=pages.findIndex(rows=>rows.some(row=>row.contains(e.target)));if(page>=0){index=page;show();e.target.focus({preventScroll:true})}},true);
  host.addEventListener('toggle',schedule,true);
