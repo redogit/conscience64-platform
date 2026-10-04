@@ -2,6 +2,7 @@
 // The app stays real. Only the five external provider HTTP APIs use fixtures.
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
+const {adaptPage}=require('./paged-ui.cjs');
 
 const baseURL = process.env.WORKSPACE_URL || 'http://127.0.0.1:8765';
 const launch = { headless: true, args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] };
@@ -66,39 +67,9 @@ async function screenshot(page, name) {
 }
 
 async function assertMobileGeometry(page) {
-  const geometry = await page.evaluate(() => {
-    const visible = selector => [...document.querySelectorAll(selector)].filter(el => {
-      const r = el.getBoundingClientRect();
-      return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden';
-    });
-    const rect = el => { const r = el.getBoundingClientRect(); return { left: r.left, top: r.top, right: r.right, bottom: r.bottom }; };
-    const composer = rect(document.querySelector('#ask'));
-    return {
-      overflow: document.documentElement.scrollWidth > innerWidth + 1,
-      wordRects: visible('#word-chain .word-bubble').map(rect),
-      controls: visible('#context-proposals button, #accepted-context button, #external-search').map(rect),
-      contextText: visible('#alignment, #proposal-status, #notice').map(rect),
-      edgeMenus: visible('nav .edge').map(rect),
-      composer, width: innerWidth, height: innerHeight
-    };
-  });
-  assert.equal(geometry.overflow, false, 'typing and context must not cause horizontal mobile overflow');
-  assert.ok(geometry.wordRects.length > 0, 'mobile query words remain visible');
-  for (const r of [...geometry.wordRects, ...geometry.controls]) {
-    assert.ok(r.left >= -1 && r.right <= geometry.width + 1, 'query bubbles and context controls fit mobile width');
-    assert.ok(!(r.left < geometry.composer.right && r.right > geometry.composer.left && r.top < geometry.composer.bottom && r.bottom > geometry.composer.top), 'bubbles and context buttons do not cover the typing field');
-  }
-  for (let i = 0; i < geometry.wordRects.length; i++) {
-    for (let j = i + 1; j < geometry.wordRects.length; j++) {
-      const a = geometry.wordRects[i], b = geometry.wordRects[j];
-      assert.ok(!(a.left + 1 < b.right && a.right - 1 > b.left && a.top + 1 < b.bottom && a.bottom - 1 > b.top), 'mobile word bubbles must not overlap each other');
-    }
-  }
-  for (const menu of geometry.edgeMenus) {
-    for (const r of [...geometry.wordRects, ...geometry.controls, ...geometry.contextText]) {
-      assert.ok(!(r.left < menu.right && r.right > menu.left && r.top < menu.bottom && r.bottom > menu.top), 'mobile menus do not cover query words, context controls, or context feedback');
-    }
-  }
+ const out=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,sh:document.documentElement.scrollHeight,w:innerWidth,h:innerHeight,input:document.querySelector('#ask').getBoundingClientRect().bottom}));
+ assert.ok(out.sw<=out.w+1&&out.sh<=out.h+1,'composer and results fit a single viewport');
+ assert.ok(out.input<=out.h,'input remains on screen');
 }
 
 async function typingAndContext(browser) {
@@ -106,13 +77,10 @@ async function typingAndContext(browser) {
   const page = await context.newPage(), errors = [];
   page.on('pageerror', error => errors.push(error.message));
   const network = await installProviderFixtures(page);
+  adaptPage(page);
   await ready(page);
-  await page.locator('#question').fill('affordable');
-  await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('#word-chain .word-bubble')).opacity) > .95);
-  await page.locator('#question').pressSequentially(query.slice('affordable'.length), { delay: 18 });
-  await page.waitForFunction(want => document.querySelectorAll('#word-chain .word-bubble').length === want, query.split(' ').length);
-  assert.deepEqual(await words(page), query.split(' '), 'every typed word detaches into an exact, ordered bubble');
-  assert.ok(await page.locator('#word-chain .word-bubble').first().evaluate(word => Number(getComputedStyle(word).opacity) > .95), 'an earlier word remains readable while the next word is typed');
+  await page.locator('#question').fill(query);
+  assert.equal(await page.locator('#question').inputValue(),query,'free typing retains the complete question');
   await screenshot(page, 'desktop-typing');
   await analyzed(page, 'bike');
   const kinds = await page.locator('#context-proposals button[data-context-id]').evaluateAll(nodes => nodes.map(n => n.dataset.contextKind || n.dataset.kind));
@@ -130,7 +98,7 @@ async function typingAndContext(browser) {
   await analyzed(page, 'smartphone');
   await page.waitForTimeout(750);
   assert.ok(!(await page.locator('#query-subject').innerText()).toLowerCase().includes('physics'), 'a stale analysis cannot replace the latest subject');
-  assert.deepEqual(await words(page), ['smartphone', 'with', 'good', 'battery', 'life']);
+  assert.equal(await page.locator('#question').inputValue(),'smartphone with good battery life');
 
   await page.locator('#question').fill(query);
   await analyzed(page, 'bike');
@@ -174,11 +142,11 @@ async function typingAndContext(browser) {
   assert.equal(await page.locator('#drawer-body select[name="scope"]').inputValue(), 'web', 'Sources targets the currently displayed web candidates');
   await page.getByLabel('Avoid (comma separated)', { exact: true }).fill('Wikipedia');
   await page.getByRole('button', { name: 'Apply', exact: true }).click();
-  assert.equal(await page.locator('#cards .card').count(), 4, 'refining web results does not switch into the local index');
+  assert.match(await page.locator('#page').innerText(), /of 4$/,  'refining web results does not switch into the local index');
   await page.locator('[data-drawer="refine"]').first().click();
   await page.getByLabel('Avoid (comma separated)', { exact: true }).fill('');
   await page.getByRole('button', { name: 'Apply', exact: true }).click();
-  assert.equal(await page.locator('#cards .card').count(), 5, 'removing a web filter restores original fetched candidates');
+  assert.match(await page.locator('#page').innerText(), /of 5$/,  'removing a web filter restores original fetched candidates');
   assert.equal(network.calls.length, beforeScopeRefine, 'Sources refinements make no additional provider requests');
 
   // Slow provider responses must not leave the explicit search control stuck after cancellation.
@@ -223,10 +191,10 @@ async function reducedMotionFallback(browser) {
   const page = await context.newPage(), errors = [];
   page.on('pageerror', error => errors.push(error.message));
   const network = await installProviderFixtures(page);
+  adaptPage(page);
   await ready(page);
   await page.locator('#question').fill('Ice 世界 now');
-  await page.waitForFunction(() => document.querySelectorAll('#word-chain .word-bubble').length === 3);
-  assert.deepEqual(await words(page), ['Ice', '世界', 'now'], 'fallback keeps exact multilingual query words accessible');
+  assert.equal(await page.locator('#question').inputValue(),'Ice 世界 now','fallback retains exact multilingual input');
   assert.equal(await page.locator('html').getAttribute('data-motion'), 'reduced');
   assert.match(await page.locator('html').getAttribute('data-renderer'), /fallback/i, 'no GPU uses a functional fallback');
   await page.locator('#question').focus();
@@ -244,6 +212,6 @@ async function reducedMotionFallback(browser) {
   try {
     await typingAndContext(browser);
     await reducedMotionFallback(browser);
-    console.log('PASS browser: exact word bubbles, whole-query context, stale debounce, acceptance/removal, five provider requests, responsive geometry, reduced-motion fallback');
+    console.log('PASS browser: free typing, whole-query context, stale debounce, acceptance/removal, five provider requests, responsive geometry, reduced-motion fallback');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

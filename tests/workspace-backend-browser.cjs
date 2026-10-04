@@ -1,6 +1,7 @@
 // Serve the actual backend: python server/search_server.py --port 8768
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
+const {adaptPage,readAllMenu}=require('./paged-ui.cjs');
 const baseURL = process.env.WORKSPACE_URL || 'http://127.0.0.1:8768';
 const launch = { headless: true, args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] };
 if (process.env.CHROMIUM_EXECUTABLE_PATH) launch.executablePath = process.env.CHROMIUM_EXECUTABLE_PATH;
@@ -8,6 +9,7 @@ if (process.env.CHROMIUM_EXECUTABLE_PATH) launch.executablePath = process.env.CH
 (async () => {
   const browser = await chromium.launch(launch);
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  adaptPage(page);
   const errors = [], external = [], providerRequests = [], corpusResponses = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => {
@@ -41,8 +43,10 @@ if (process.env.CHROMIUM_EXECUTABLE_PATH) launch.executablePath = process.env.CH
     await page.locator('#ask').evaluate(form => form.requestSubmit());
     const card = page.locator('.card').filter({ has: page.getByRole('heading', { name: 'Physics / GR–Quantum Seam', exact: true }) });
     await card.waitFor();
-    await card.getByRole('button', { name: 'Relations & record', exact: true }).click();
-    const details = await page.locator('#drawer-body').innerText();
+    await card.getByRole('button', { name: 'Details & actions', exact: true }).click();
+    await page.getByRole('button',{name:'Relations & record',exact:true}).click();
+    await page.waitForTimeout(80);
+    const details = await readAllMenu(page);
     assert.ok(details.includes('project:physics'), 'record inspection preserves the original logical identity');
     assert.ok(details.includes('uoid:sha256:a1ca3309d2a86e1a3ee8944fe60ea1a206879db6873bdb2933887989227e8f40'), 'record inspection retains the original source UOID');
     assert.ok(/direct relations/.test(details), 'relation inspection uses the connected corpus');
@@ -53,7 +57,7 @@ if (process.env.CHROMIUM_EXECUTABLE_PATH) launch.executablePath = process.env.CH
     await page.getByRole('button', { name: 'Browse projects and lessons', exact: true }).click();
     await page.getByRole('button', { name: 'Historical Recovery', exact: true }).click();
     await page.getByRole('heading', { name: 'Historical Recovery', exact: true }).waitFor();
-    assert.ok((await page.locator('#drawer-body').innerText()).includes('2026-09-13'), 'the real separate registry supplies its project lessons');
+    assert.ok((await readAllMenu(page)).includes('2026-09-13'), 'the real separate registry supplies its project lessons');
     await page.screenshot({ path: 'backend-projects-preview.png', fullPage: true });
     assert.deepEqual(errors, []);
     assert.deepEqual(external, []);

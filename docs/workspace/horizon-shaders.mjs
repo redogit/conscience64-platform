@@ -17,12 +17,12 @@ fn shade(pixel: vec2f) -> vec3f {
   let p: vec2f = (pixel - hole.xy) / radius;
   let r: f32 = length(p);
   let angle: f32 = atan2(p.y, p.x);
-  let ice: vec3f = vec3f(0.63, 0.89, 1.0);
-  let cyan: vec3f = vec3f(0.08, 0.53, 0.66);
-  let gold: vec3f = vec3f(1.0, 0.58, 0.20);
-  var color: vec3f = vec3f(0.0018, 0.0036, 0.0054);
+  let ice: vec3f = vec3f(0.88, 0.88, 0.88);
+  let cyan: vec3f = vec3f(0.35, 0.35, 0.35);
+  let gold: vec3f = vec3f(0.85, 0.08, 0.12);
+  var color: vec3f = vec3f(0.003, 0.003, 0.003);
   let nebula: f32 = exp(-dot(p * vec2f(0.43, 0.75), p * vec2f(0.43, 0.75)));
-  color += vec3f(0.003, 0.013, 0.021) * nebula;
+  color += vec3f(0.012, 0.012, 0.012) * nebula;
   // Sparse, fixed stars: there is no random geometry or temporal flicker.
   let cell: vec2f = floor(pixel / 64.0);
   let local: vec2f = fract(pixel / 64.0);
@@ -70,7 +70,7 @@ fn shade(pixel: vec2f) -> vec3f {
     let outerEdge: f32 = exp(-pow((r - 1.078) / 0.007, 2.0));
     color += ice * outerEdge * 0.13;
     if (r < 0.996) {
-      color = vec3f(0.0001, 0.00025, 0.0005);
+      color = vec3f(0.0002, 0.0002, 0.0002);
       color += cyan * pow(r, 16.0) * 0.001;
     }
   }

@@ -177,44 +177,44 @@ export async function initializeRenderer(initialCanvas) {
     render = sample => {
       ctx.setTransform(dpr,0,0,dpr,0,0);
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#020508';
+      ctx.fillStyle = '#050505';
       ctx.fillRect(0,0,width,height);
       const glow = ctx.createRadialGradient(layout.centerX,layout.centerY,layout.radius * .7,layout.centerX,layout.centerY,layout.radius * 2.8);
-      glow.addColorStop(0,'rgba(9,27,35,0)'); glow.addColorStop(.22,'rgba(20,59,73,.22)'); glow.addColorStop(.62,'rgba(5,26,37,.12)'); glow.addColorStop(1,'rgba(0,0,0,0)');
+      glow.addColorStop(0,'rgba(20,20,20,0)'); glow.addColorStop(.22,'rgba(50,50,50,.22)'); glow.addColorStop(.62,'rgba(25,25,25,.12)'); glow.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle = glow; ctx.fillRect(0,0,width,height);
-      for (const star of stars) { ctx.fillStyle = `rgba(195,224,236,${star.opacity})`; ctx.beginPath(); ctx.arc(star.x * width,star.y * height,star.radius,0,Math.PI * 2); ctx.fill(); }
+      for (const star of stars) { ctx.fillStyle = `rgba(220,220,220,${star.opacity})`; ctx.beginPath(); ctx.arc(star.x * width,star.y * height,star.radius,0,Math.PI * 2); ctx.fill(); }
       ctx.globalCompositeOperation = 'screen';
-      ctx.shadowColor = 'rgba(107,209,232,.38)'; ctx.shadowBlur = 22;
-      ctx.lineWidth = layout.radius * .08; ctx.strokeStyle = 'rgba(125,157,154,.14)'; orbit(layout.radius * 1.72,.265,0);
+      ctx.shadowColor = 'rgba(200,200,200,.38)'; ctx.shadowBlur = 22;
+      ctx.lineWidth = layout.radius * .08; ctx.strokeStyle = 'rgba(150,150,150,.14)'; orbit(layout.radius * 1.72,.265,0);
       for (let i = 0; i < 38; i++) {
         const seed = i * .61803398875 % 1;
         const alpha = .20 + seed * .30;
         ctx.lineWidth = .48 + seed * .34;
-        ctx.strokeStyle = i % 7 < 2 ? `rgba(249,179,98,${alpha})` : `rgba(163,226,245,${alpha})`;
+        ctx.strokeStyle = i % 7 < 2 ? `rgba(210,30,45,${alpha})` : `rgba(220,220,220,${alpha})`;
         ctx.shadowColor = ctx.strokeStyle; ctx.shadowBlur = 4 + seed * 3;
         orbit(layout.radius * (1.12 + i * .033),.33 + seed * .54,i * 1.7 + (reduced ? 0 : sceneTime * .035),layout.radius * .021);
       }
       ctx.globalCompositeOperation = 'source-over'; ctx.shadowBlur = 0;
-      ctx.fillStyle = '#000102'; ctx.beginPath(); ctx.arc(layout.centerX,layout.centerY,layout.radius * 1.008,0,Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#010101'; ctx.beginPath(); ctx.arc(layout.centerX,layout.centerY,layout.radius * 1.008,0,Math.PI * 2); ctx.fill();
       ctx.globalCompositeOperation = 'screen';
-      ctx.shadowColor = '#72c7df'; ctx.shadowBlur = 15; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(130,214,239,.28)';
+      ctx.shadowColor = '#bbbbbb'; ctx.shadowBlur = 15; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(200,200,200,.28)';
       ctx.beginPath(); ctx.arc(layout.centerX,layout.centerY,layout.radius * 1.015,0,Math.PI * 2); ctx.stroke();
-      ctx.shadowBlur = 7; ctx.lineWidth = 1.3; ctx.strokeStyle = 'rgba(214,247,255,.95)'; ctx.stroke();
-      ctx.shadowBlur = 0; ctx.lineWidth = .55; ctx.strokeStyle = 'rgba(177,230,243,.16)'; ctx.beginPath();ctx.arc(layout.centerX,layout.centerY,layout.radius * 1.078,0,Math.PI * 2);ctx.stroke();
+      ctx.shadowBlur = 7; ctx.lineWidth = 1.3; ctx.strokeStyle = 'rgba(245,245,245,.95)'; ctx.stroke();
+      ctx.shadowBlur = 0; ctx.lineWidth = .55; ctx.strokeStyle = 'rgba(200,200,200,.16)'; ctx.beginPath();ctx.arc(layout.centerX,layout.centerY,layout.radius * 1.078,0,Math.PI * 2);ctx.stroke();
       ctx.save();
       ctx.beginPath(); ctx.rect(0,0,width,height); ctx.arc(layout.centerX,layout.centerY,layout.radius * .996,0,Math.PI * 2); ctx.clip('evenodd');
       for (const trail of sample.trails) {
         if (trail.progress < .01) continue;
         const fade = trail.progress >= .99 ? .08 : .38;
-        ctx.strokeStyle = `rgba(176,233,247,${fade})`; ctx.lineWidth = .7;
+        ctx.strokeStyle = `rgba(220,220,220,${fade})`; ctx.lineWidth = .7;
         ctx.beginPath(); ctx.moveTo(trail.start.x,trail.start.y);
         for (let i = 1; i <= 40; i++) {
           const t = i / 40 * trail.progress, s = 1 - t;
           ctx.lineTo(s * s * trail.start.x + 2 * s * t * trail.control.x + t * t * trail.end.x,s * s * trail.start.y + 2 * s * t * trail.control.y + t * t * trail.end.y);
         }
         ctx.stroke();
-        ctx.shadowColor = '#b3e7f6'; ctx.shadowBlur = trail.progress >= .99 ? 5 : 12;
-        ctx.fillStyle = trail.progress >= .99 ? 'rgba(202,244,254,.35)' : 'rgba(225,251,255,.95)';
+        ctx.shadowColor = '#dddddd'; ctx.shadowBlur = trail.progress >= .99 ? 5 : 12;
+        ctx.fillStyle = trail.progress >= .99 ? 'rgba(225,225,225,.35)' : 'rgba(245,245,245,.95)';
         ctx.beginPath(); ctx.arc(trail.head.x,trail.head.y,trail.progress >= .99 ? 1 : 1.7,0,Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
       }
       ctx.restore();

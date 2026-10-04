@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
+const {adaptPage,reveal}=require('./paged-ui.cjs');
 
 const baseURL = process.env.WORKSPACE_URL || 'http://127.0.0.1:8765';
 const launch = { headless: true, args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] };
@@ -25,6 +26,7 @@ async function exportOrbit(page) {
 (async () => {
   const browser = await chromium.launch(launch);
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true });
+  adaptPage(page);
   const errors = [], externalRequests = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.route('**/*', route => {
@@ -48,7 +50,8 @@ async function exportOrbit(page) {
     await page.getByRole('heading', { name: 'Phone options', exact: true }).waitFor();
 
     // Editing updates the same saved note, rather than appending a duplicate.
-    await phone.getByRole('button', { name: 'Edit', exact: true }).click();
+    await phone.getByRole('button', { name: 'Details & actions', exact: true }).click();
+    await page.getByRole('button', { name: 'Edit', exact: true }).click();
     await page.getByLabel('Title', { exact: true }).fill('Phone shortlist');
     await page.getByLabel('Note', { exact: true }).fill('Android budget under 400 with a good camera');
     await page.getByRole('button', { name: 'Save changes', exact: true }).click();
@@ -93,7 +96,9 @@ async function exportOrbit(page) {
     await submit(page, 'rideprep');
     const learned = page.locator('.card').filter({ has: page.getByRole('heading', { name: 'Bike touring checklist', exact: true }) });
     await learned.waitFor();
-    await learned.getByRole('button', { name: 'Helpful', exact: true }).click();
+    await learned.getByRole('button', { name: 'Details & actions', exact: true }).click();
+    await page.getByRole('button', { name: 'Helpful', exact: true }).click();
+    await page.locator('#close').click();
     await page.reload();
     await page.getByRole('heading', { name: 'Bike touring checklist', exact: true }).waitFor();
     assert.ok((await page.locator('#cards').innerText()).includes('Carry a repair kit'), 'a taught answer and phrase alias survive reload and retrieve the remembered text');
